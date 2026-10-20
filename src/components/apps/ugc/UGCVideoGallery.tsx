@@ -28,7 +28,7 @@ const SAMPLE_PROJECTS: VideoProject[] = [
     hook: '"No esperaba que este producto me cambiara la rutina tan rápido... miren el resultado"',
     aspectRatio: '9:16',
     tags: ['Belleza Real', 'Rutina Diaria', 'Alta Retención'],
-    videoSrc: '/1.MP4',
+    videoSrc: '/1.mp4',
   },
   {
     id: 'vid-2',
@@ -42,7 +42,7 @@ const SAMPLE_PROJECTS: VideoProject[] = [
     hook: '"Lo probé durante días para decirles la verdad antes de que lo compren"',
     aspectRatio: '9:16',
     tags: ['Opinión Sincera', 'Cero Pose', 'Confianza'],
-    videoSrc: '/2.MOV',
+    videoSrc: '/2.mp4',
   },
   {
     id: 'vid-3',
@@ -56,7 +56,7 @@ const SAMPLE_PROJECTS: VideoProject[] = [
     hook: '"Los primeros 3 segundos que hacen que la gente no pase de largo y quiera comprar"',
     aspectRatio: '9:16',
     tags: ['Gancho Viral', 'Venta Directa', 'Reels & TikTok'],
-    videoSrc: '/3.MOV',
+    videoSrc: '/3.mp4',
   },
 ];
 
