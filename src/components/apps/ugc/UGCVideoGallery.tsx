@@ -9,7 +9,9 @@ import {
   X,
   MessageCircle,
   ExternalLink,
-  Film
+  Film,
+  ChevronLeft,
+  ChevronRight
 } from 'lucide-react';
 import type { VideoProject, VGCCategory } from '../../../types/ugc';
 
@@ -74,6 +76,14 @@ export const UGCVideoGallery: React.FC = () => {
 
   const videoRefs = useRef<Record<string, HTMLVideoElement | null>>({});
   const modalVideoRef = useRef<HTMLVideoElement | null>(null);
+  const galleryScrollRef = useRef<HTMLDivElement>(null);
+
+  const scrollGallery = (direction: 'left' | 'right') => {
+    if (galleryScrollRef.current) {
+      const scrollAmount = direction === 'left' ? -330 : 330;
+      galleryScrollRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    }
+  };
 
   const filteredProjects = selectedCategory === 'Todos'
     ? SAMPLE_PROJECTS
@@ -150,28 +160,56 @@ export const UGCVideoGallery: React.FC = () => {
           </p>
         </div>
 
-        {/* Category Filter Pills */}
-        <div className="flex flex-wrap items-center justify-center gap-2.5 mb-10">
-          {CATEGORIES.map((cat) => {
-            const isSelected = selectedCategory === cat;
-            return (
-              <button
-                key={cat}
-                onClick={() => setSelectedCategory(cat)}
-                className={`px-4 py-2 rounded-full text-xs font-bold transition-all cursor-pointer border-2 border-black ${
-                  isSelected
-                    ? 'bg-ugc-pink text-white shadow-sticker scale-105'
-                    : 'bg-[#FBF8EF] hover:bg-ugc-yellow text-slate-800 shadow-[2px_2px_0px_#000]'
-                }`}
-              >
-                {cat}
-              </button>
-            );
-          })}
+        {/* Category Filter Pills & Navigation Controls */}
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-6">
+          <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2">
+            {CATEGORIES.map((cat) => {
+              const isSelected = selectedCategory === cat;
+              return (
+                <button
+                  key={cat}
+                  onClick={() => setSelectedCategory(cat)}
+                  className={`px-3.5 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer border-2 border-black ${
+                    isSelected
+                      ? 'bg-ugc-pink text-white shadow-sticker scale-105'
+                      : 'bg-[#FBF8EF] hover:bg-ugc-yellow text-slate-800 shadow-[2px_2px_0px_#000]'
+                  }`}
+                >
+                  {cat}
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Horizontal Scroll Controls */}
+          <div className="flex items-center gap-2.5">
+            <span className="text-[11px] font-bold text-slate-600 font-mono hidden md:inline">
+              ← Desliza videos →
+            </span>
+            <button
+              onClick={() => scrollGallery('left')}
+              className="p-2 sm:p-2.5 rounded-full bg-white hover:bg-ugc-yellow text-slate-900 border-2 border-black shadow-[2px_2px_0px_#000] active:translate-x-0.5 active:translate-y-0.5 transition-all cursor-pointer"
+              title="Anterior video"
+              aria-label="Anterior video"
+            >
+              <ChevronLeft className="w-4 h-4" />
+            </button>
+            <button
+              onClick={() => scrollGallery('right')}
+              className="p-2 sm:p-2.5 rounded-full bg-white hover:bg-ugc-yellow text-slate-900 border-2 border-black shadow-[2px_2px_0px_#000] active:translate-x-0.5 active:translate-y-0.5 transition-all cursor-pointer"
+              title="Siguiente video"
+              aria-label="Siguiente video"
+            >
+              <ChevronRight className="w-4 h-4" />
+            </button>
+          </div>
         </div>
 
-        {/* Video Cards Grid - 3 Columns */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* Video Cards Horizontal Slider Track */}
+        <div 
+          ref={galleryScrollRef}
+          className="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-6 pt-2 px-1 no-scrollbar scroll-smooth"
+        >
           <AnimatePresence mode="popLayout">
             {filteredProjects.map((project, idx) => {
               const isPlaying = playingVideoId === project.id;
@@ -183,11 +221,11 @@ export const UGCVideoGallery: React.FC = () => {
                 <motion.div
                   key={project.id}
                   layout
-                  initial={{ opacity: 0, scale: 0.9 }}
+                  initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.9 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
                   transition={{ duration: 0.3 }}
-                  className="rounded-[32px] bg-[#FBF8EF] border-2 border-black p-3.5 shadow-sticker hover:shadow-[6px_6px_0px_#000] transition-all duration-300 flex flex-col justify-between group"
+                  className="shrink-0 w-[275px] sm:w-[315px] md:w-[335px] snap-center rounded-[32px] bg-[#FBF8EF] border-2 border-black p-3.5 shadow-sticker hover:shadow-[6px_6px_0px_#000] transition-all duration-300 flex flex-col justify-between group"
                 >
                   {/* Smartphone Frame Simulator - 100% CLEAN VIDEO WITHOUT OBSTRUCTIVE OVERLAYS */}
                   <div 
@@ -351,6 +389,12 @@ export const UGCVideoGallery: React.FC = () => {
               );
             })}
           </AnimatePresence>
+        </div>
+
+        {/* Swipe Hint for touch devices */}
+        <div className="flex items-center justify-center gap-2 mt-1 text-slate-500 text-xs font-mono">
+          <span className="w-1.5 h-1.5 rounded-full bg-ugc-pink animate-ping" />
+          <span>Arrastra o usa las flechas para explorar los {filteredProjects.length} videos en horizontal</span>
         </div>
 
       </div>

@@ -77,6 +77,15 @@
     border-radius: 9999px;
     border: 2px solid #f8f5e6;
   }
+
+  /* Utility to hide scrollbar while preserving scroll functionality */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
 }
 
 /* Windows XP Luna Titlebar Gradient */

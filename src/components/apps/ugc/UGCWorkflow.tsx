@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { 
   Smile, 
   Users, 
@@ -10,7 +10,9 @@ import {
   Rocket, 
   CheckCircle2, 
   Clock,
-  Sparkles
+  Sparkles,
+  ChevronLeft,
+  ChevronRight
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -18,6 +20,14 @@ type WorkflowTab = 'process' | 'benefits';
 
 export const UGCWorkflow: React.FC = () => {
   const [activeTab, setActiveTab] = useState<WorkflowTab>('process');
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  const scrollTrack = (direction: 'left' | 'right') => {
+    if (scrollRef.current) {
+      const scrollAmount = direction === 'left' ? -310 : 310;
+      scrollRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    }
+  };
 
   const benefits = [
     {
@@ -136,31 +146,56 @@ export const UGCWorkflow: React.FC = () => {
           </p>
         </div>
 
-        {/* Interactive Segmented Switcher (Keeps page compact & engaging) */}
-        <div className="flex items-center justify-center gap-2 pt-1">
-          <button
-            onClick={() => setActiveTab('process')}
-            className={`px-4 sm:px-5 py-2 rounded-2xl font-chunky text-xs uppercase tracking-wider border-2 border-black transition-all flex items-center gap-1.5 cursor-pointer ${
-              activeTab === 'process'
-                ? 'bg-ugc-pink text-white shadow-sticker -translate-y-0.5'
-                : 'bg-white text-slate-800 hover:bg-ugc-yellow shadow-sm'
-            }`}
-          >
-            <Clock className="w-3.5 h-3.5" />
-            <span>El Proceso en 4 Pasos (Día 1 a 5)</span>
-          </button>
+        {/* Interactive Segmented Switcher & Navigation Controls */}
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-1">
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => setActiveTab('process')}
+              className={`px-3.5 sm:px-4 py-2 rounded-2xl font-chunky text-xs uppercase tracking-wider border-2 border-black transition-all flex items-center gap-1.5 cursor-pointer ${
+                activeTab === 'process'
+                  ? 'bg-ugc-pink text-white shadow-sticker -translate-y-0.5'
+                  : 'bg-white text-slate-800 hover:bg-ugc-yellow shadow-sm'
+              }`}
+            >
+              <Clock className="w-3.5 h-3.5" />
+              <span>4 Pasos (Día 1 a 5)</span>
+            </button>
 
-          <button
-            onClick={() => setActiveTab('benefits')}
-            className={`px-4 sm:px-5 py-2 rounded-2xl font-chunky text-xs uppercase tracking-wider border-2 border-black transition-all flex items-center gap-1.5 cursor-pointer ${
-              activeTab === 'benefits'
-                ? 'bg-ugc-pink text-white shadow-sticker -translate-y-0.5'
-                : 'bg-white text-slate-800 hover:bg-ugc-yellow shadow-sm'
-            }`}
-          >
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>4 Beneficios Clave</span>
-          </button>
+            <button
+              onClick={() => setActiveTab('benefits')}
+              className={`px-3.5 sm:px-4 py-2 rounded-2xl font-chunky text-xs uppercase tracking-wider border-2 border-black transition-all flex items-center gap-1.5 cursor-pointer ${
+                activeTab === 'benefits'
+                  ? 'bg-ugc-pink text-white shadow-sticker -translate-y-0.5'
+                  : 'bg-white text-slate-800 hover:bg-ugc-yellow shadow-sm'
+              }`}
+            >
+              <Sparkles className="w-3.5 h-3.5" />
+              <span>4 Beneficios Clave</span>
+            </button>
+          </div>
+
+          {/* Prev / Next Arrows */}
+          <div className="flex items-center gap-2">
+            <span className="text-[11px] font-bold text-slate-600 font-mono hidden sm:inline">
+              ← Desliza horizontal →
+            </span>
+            <button
+              onClick={() => scrollTrack('left')}
+              className="p-2 rounded-full bg-white hover:bg-ugc-yellow text-slate-900 border-2 border-black shadow-[2px_2px_0px_#000] active:translate-x-0.5 active:translate-y-0.5 transition-all cursor-pointer"
+              title="Anterior"
+              aria-label="Anterior"
+            >
+              <ChevronLeft className="w-4 h-4" />
+            </button>
+            <button
+              onClick={() => scrollTrack('right')}
+              className="p-2 rounded-full bg-white hover:bg-ugc-yellow text-slate-900 border-2 border-black shadow-[2px_2px_0px_#000] active:translate-x-0.5 active:translate-y-0.5 transition-all cursor-pointer"
+              title="Siguiente"
+              aria-label="Siguiente"
+            >
+              <ChevronRight className="w-4 h-4" />
+            </button>
+          </div>
         </div>
 
         {/* Content Views */}
@@ -172,15 +207,19 @@ export const UGCWorkflow: React.FC = () => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.2 }}
-              className="space-y-4"
+              className="space-y-3"
             >
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              {/* Horizontal Scroll Track for Steps */}
+              <div 
+                ref={scrollRef}
+                className="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-4 pt-1 px-1 no-scrollbar scroll-smooth"
+              >
                 {steps.map((step, idx) => {
                   const Icon = step.icon;
                   return (
                     <div 
                       key={idx}
-                      className={`relative rounded-3xl ${step.cardColor} border-2 border-black p-4 sm:p-5 flex flex-col justify-between shadow-sticker hover:shadow-[5px_5px_0px_#000] transition-all group`}
+                      className={`shrink-0 w-[270px] sm:w-[295px] snap-center relative rounded-3xl ${step.cardColor} border-2 border-black p-4 sm:p-5 flex flex-col justify-between shadow-sticker hover:shadow-[5px_5px_0px_#000] transition-all group`}
                     >
                       <div>
                         <div className="flex items-center justify-between mb-3">
@@ -218,6 +257,11 @@ export const UGCWorkflow: React.FC = () => {
                   );
                 })}
               </div>
+
+              <div className="flex items-center justify-center gap-2 text-slate-500 text-xs font-mono">
+                <span className="w-1.5 h-1.5 rounded-full bg-ugc-pink animate-ping" />
+                <span>Desliza para ver los 4 pasos del proceso (Día 1 al 5)</span>
+              </div>
             </motion.div>
           ) : (
             <motion.div
@@ -228,35 +272,46 @@ export const UGCWorkflow: React.FC = () => {
               transition={{ duration: 0.2 }}
               className="space-y-4"
             >
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {/* Horizontal Scroll Track for Benefits */}
+              <div 
+                ref={scrollRef}
+                className="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-4 pt-1 px-1 no-scrollbar scroll-smooth"
+              >
                 {benefits.map((benefit, idx) => {
                   const Icon = benefit.icon;
                   return (
                     <div
                       key={idx}
-                      className={`relative p-5 sm:p-6 rounded-3xl ${benefit.bgColor} border-2 border-black shadow-sticker hover:shadow-[5px_5px_0px_#000] transition-all`}
+                      className={`shrink-0 w-[275px] sm:w-[310px] snap-center relative p-5 sm:p-6 rounded-3xl ${benefit.bgColor} border-2 border-black shadow-sticker hover:shadow-[5px_5px_0px_#000] transition-all flex flex-col justify-between`}
                     >
-                      <div className="flex items-start justify-between mb-3">
-                        <div className="w-11 h-11 rounded-xl bg-white border-2 border-black flex items-center justify-center text-ugc-pink shadow-sm">
-                          <Icon className="w-5 h-5" />
+                      <div>
+                        <div className="flex items-start justify-between mb-3">
+                          <div className="w-11 h-11 rounded-xl bg-white border-2 border-black flex items-center justify-center text-ugc-pink shadow-sm">
+                            <Icon className="w-5 h-5" />
+                          </div>
+                          <span className="text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-full bg-white border border-black text-slate-800 shadow-sm">
+                            {benefit.badge}
+                          </span>
                         </div>
-                        <span className="text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-full bg-white border border-black text-slate-800 shadow-sm">
-                          {benefit.badge}
-                        </span>
-                      </div>
 
-                      <h3 className="font-chunky text-lg text-slate-900 mb-0.5">
-                        {benefit.title}
-                      </h3>
-                      <p className="text-xs text-ugc-pink font-bold mb-2">
-                        {benefit.subtitle}
-                      </p>
-                      <p className="text-xs text-slate-700 font-medium leading-relaxed">
-                        {benefit.description}
-                      </p>
+                        <h3 className="font-chunky text-lg text-slate-900 mb-0.5">
+                          {benefit.title}
+                        </h3>
+                        <p className="text-xs text-ugc-pink font-bold mb-2">
+                          {benefit.subtitle}
+                        </p>
+                        <p className="text-xs text-slate-700 font-medium leading-relaxed">
+                          {benefit.description}
+                        </p>
+                      </div>
                     </div>
                   );
                 })}
+              </div>
+
+              <div className="flex items-center justify-center gap-2 text-slate-500 text-xs font-mono">
+                <span className="w-1.5 h-1.5 rounded-full bg-ugc-pink animate-ping" />
+                <span>Desliza para ver los 4 beneficios clave de trabajar con Sofía</span>
               </div>
 
               {/* UGC vs Traditional Comparison Mini Banner */}

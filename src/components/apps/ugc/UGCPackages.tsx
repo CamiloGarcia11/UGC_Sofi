@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { 
   Check, 
   Sparkles, 
@@ -6,7 +6,9 @@ import {
   Star,
   Layers,
   FileText,
-  Download
+  Download,
+  ChevronLeft,
+  ChevronRight
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import type { UGCPackage } from '../../../types/ugc';
@@ -95,6 +97,22 @@ const ADDITIONAL_SERVICES = [
 
 export const UGCPackages: React.FC = () => {
   const [selectedPackId, setSelectedPackId] = useState<string>('pack-trio');
+  const packagesScrollRef = useRef<HTMLDivElement>(null);
+  const servicesScrollRef = useRef<HTMLDivElement>(null);
+
+  const scrollPackages = (direction: 'left' | 'right') => {
+    if (packagesScrollRef.current) {
+      const scrollAmount = direction === 'left' ? -350 : 350;
+      packagesScrollRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    }
+  };
+
+  const scrollServices = (direction: 'left' | 'right') => {
+    if (servicesScrollRef.current) {
+      const scrollAmount = direction === 'left' ? -280 : 280;
+      servicesScrollRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    }
+  };
 
   const handleSelectPackage = (pack: UGCPackage) => {
     setSelectedPackId(pack.id);
@@ -138,39 +156,70 @@ export const UGCPackages: React.FC = () => {
           </p>
         </div>
 
-        {/* Mobile Switcher for Packages */}
-        <div className="flex lg:hidden items-center justify-center gap-1.5 mb-6 overflow-x-auto no-scrollbar py-1">
-          {UGC_PACKAGES.map((p) => (
+        {/* Packages Navigation Bar */}
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-3 mb-6">
+          <div className="flex items-center gap-2 overflow-x-auto no-scrollbar py-1">
+            {UGC_PACKAGES.map((p) => (
+              <button
+                key={p.id}
+                onClick={() => {
+                  setSelectedPackId(p.id);
+                  const el = document.getElementById(`pkg-${p.id}`);
+                  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                }}
+                className={`px-3.5 py-1.5 rounded-xl font-chunky text-xs uppercase tracking-wider border-2 border-black transition-all cursor-pointer ${
+                  selectedPackId === p.id
+                    ? 'bg-ugc-pink text-white shadow-sticker -translate-y-0.5'
+                    : 'bg-white text-slate-800 hover:bg-ugc-yellow shadow-sm'
+                }`}
+              >
+                <span>{p.name}</span>
+              </button>
+            ))}
+          </div>
+
+          <div className="flex items-center gap-2">
+            <span className="text-[11px] font-bold text-slate-600 font-mono hidden sm:inline">
+              ← Desliza planes →
+            </span>
             <button
-              key={p.id}
-              onClick={() => setSelectedPackId(p.id)}
-              className={`px-3 py-1.5 rounded-xl font-chunky text-[11px] uppercase tracking-wider border-2 border-black transition-all ${
-                selectedPackId === p.id
-                  ? 'bg-ugc-pink text-white shadow-sticker'
-                  : 'bg-white text-slate-800'
-              }`}
+              onClick={() => scrollPackages('left')}
+              className="p-2 sm:p-2.5 rounded-full bg-white hover:bg-ugc-yellow text-slate-900 border-2 border-black shadow-[2px_2px_0px_#000] active:translate-x-0.5 active:translate-y-0.5 transition-all cursor-pointer"
+              title="Plan anterior"
+              aria-label="Plan anterior"
             >
-              <span>{p.name}</span>
+              <ChevronLeft className="w-4 h-4" />
             </button>
-          ))}
+            <button
+              onClick={() => scrollPackages('right')}
+              className="p-2 sm:p-2.5 rounded-full bg-white hover:bg-ugc-yellow text-slate-900 border-2 border-black shadow-[2px_2px_0px_#000] active:translate-x-0.5 active:translate-y-0.5 transition-all cursor-pointer"
+              title="Plan siguiente"
+              aria-label="Plan siguiente"
+            >
+              <ChevronRight className="w-4 h-4" />
+            </button>
+          </div>
         </div>
 
-        {/* 3 Main Packages Cards Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8 items-stretch mb-8 sm:mb-10">
+        {/* 3 Main Packages Horizontal Carousel Track */}
+        <div 
+          ref={packagesScrollRef}
+          className="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-6 pt-3 px-1 no-scrollbar scroll-smooth mb-2"
+        >
           {UGC_PACKAGES.map((pack) => {
             const isRec = pack.recommended;
             const isSelected = selectedPackId === pack.id;
 
             return (
               <div
+                id={`pkg-${pack.id}`}
                 key={pack.id}
                 onClick={() => setSelectedPackId(pack.id)}
-                className={`relative rounded-[32px] p-5 sm:p-6 flex flex-col justify-between transition-all duration-300 cursor-pointer border-2 border-black ${
-                  /* On mobile, if filtered, highlight selected or show active */
+                className={`shrink-0 w-[285px] sm:w-[330px] md:w-[350px] snap-center relative rounded-[32px] p-5 sm:p-6 flex flex-col justify-between transition-all duration-300 cursor-pointer border-2 border-black ${
                   isSelected ? 'ring-2 ring-ugc-pink' : ''
                 } ${
                   isRec
-                    ? 'bg-white shadow-[6px_6px_0px_#E33B87] ring-4 ring-ugc-pink/30 lg:-translate-y-2'
+                    ? 'bg-white shadow-[6px_6px_0px_#E33B87] ring-4 ring-ugc-pink/30'
                     : isSelected
                     ? 'bg-white shadow-[6px_6px_0px_#000]'
                     : 'bg-[#fffdf9] hover:bg-white shadow-sticker'
@@ -246,9 +295,14 @@ export const UGCPackages: React.FC = () => {
           })}
         </div>
 
+        <div className="flex items-center justify-center gap-2 mb-8 text-slate-500 text-xs font-mono">
+          <span className="w-1.5 h-1.5 rounded-full bg-ugc-pink animate-ping" />
+          <span>Desliza en horizontal para comparar los 3 planes de video UGC</span>
+        </div>
+
         {/* Compact Additional Services & Combos */}
-        <div className="mb-10 p-6 rounded-3xl bg-white border-2 border-black shadow-sticker">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pb-4 mb-4 border-b-2 border-slate-100">
+        <div className="mb-10 p-5 sm:p-6 rounded-3xl bg-white border-2 border-black shadow-sticker">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pb-4 mb-4 border-b-2 border-slate-100">
             <div className="flex items-center gap-2">
               <div className="p-2 rounded-xl bg-ugc-blue border border-black">
                 <Layers className="w-4 h-4 text-slate-900" />
@@ -263,23 +317,48 @@ export const UGCPackages: React.FC = () => {
               </div>
             </div>
 
-            <a
-              href="/media-kit-sofia-cruz-2026.pdf"
-              target="_blank"
-              rel="noreferrer"
-              className="px-3.5 py-1.5 rounded-full bg-ugc-cream hover:bg-ugc-yellow border-2 border-black text-xs font-bold text-slate-900 flex items-center gap-1.5 shadow-sm transition-colors shrink-0"
-            >
-              <Download className="w-3.5 h-3.5 text-ugc-pink" />
-              <span>Ver Media Kit PDF</span>
-            </a>
+            <div className="flex items-center gap-2 w-full sm:w-auto justify-between sm:justify-end">
+              <div className="flex items-center gap-1.5">
+                <button
+                  onClick={() => scrollServices('left')}
+                  className="p-1.5 rounded-full bg-white hover:bg-ugc-yellow text-slate-900 border-2 border-black shadow-[2px_2px_0px_#000] active:translate-x-0.5 active:translate-y-0.5 transition-all cursor-pointer"
+                  title="Servicio anterior"
+                  aria-label="Servicio anterior"
+                >
+                  <ChevronLeft className="w-3.5 h-3.5" />
+                </button>
+                <button
+                  onClick={() => scrollServices('right')}
+                  className="p-1.5 rounded-full bg-white hover:bg-ugc-yellow text-slate-900 border-2 border-black shadow-[2px_2px_0px_#000] active:translate-x-0.5 active:translate-y-0.5 transition-all cursor-pointer"
+                  title="Servicio siguiente"
+                  aria-label="Servicio siguiente"
+                >
+                  <ChevronRight className="w-3.5 h-3.5" />
+                </button>
+              </div>
+
+              <a
+                href="/media-kit-sofia-cruz-2026.pdf"
+                target="_blank"
+                rel="noreferrer"
+                className="px-3 py-1.5 rounded-full bg-ugc-cream hover:bg-ugc-yellow border-2 border-black text-xs font-bold text-slate-900 flex items-center gap-1.5 shadow-sm transition-colors shrink-0"
+              >
+                <Download className="w-3.5 h-3.5 text-ugc-pink" />
+                <span>Media Kit PDF</span>
+              </a>
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
+          {/* Horizontal Track for Additional Services */}
+          <div 
+            ref={servicesScrollRef}
+            className="flex overflow-x-auto snap-x gap-3.5 pb-2 pt-1 no-scrollbar scroll-smooth"
+          >
             {ADDITIONAL_SERVICES.map((srv, i) => (
               <div 
                 key={i}
                 onClick={() => handleServiceQuote(srv.title, srv.price)}
-                className="p-3.5 rounded-2xl bg-[#FAF7F0] border-2 border-black hover:bg-white hover:shadow-sticker transition-all cursor-pointer flex flex-col justify-between group"
+                className="shrink-0 w-[240px] sm:w-[265px] snap-start p-3.5 rounded-2xl bg-[#FAF7F0] border-2 border-black hover:bg-white hover:shadow-sticker transition-all cursor-pointer flex flex-col justify-between group"
               >
                 <div>
                   <span className="px-2 py-0.5 rounded-full bg-white border border-black font-mono text-[9px] font-bold text-ugc-pink block w-fit mb-1.5">
@@ -303,6 +382,11 @@ export const UGCPackages: React.FC = () => {
               </div>
             ))}
           </div>
+
+          <div className="flex items-center justify-center gap-2 mt-3 text-slate-500 text-[11px] font-mono">
+            <span className="w-1.5 h-1.5 rounded-full bg-ugc-pink animate-ping" />
+            <span>Desliza para ver los 4 servicios y combos adicionales</span>
+          </div>
         </div>
 
         {/* Compact Terms & Conditions */}
@@ -314,20 +398,20 @@ export const UGCPackages: React.FC = () => {
             </span>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-[11px]">
-            <div className="p-2.5 bg-white rounded-xl border border-black/15">
+          <div className="flex overflow-x-auto sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-3 text-[11px] no-scrollbar pb-1">
+            <div className="shrink-0 w-[230px] sm:w-auto p-2.5 bg-white rounded-xl border border-black/15">
               <strong className="text-slate-900 block mb-0.5">📦 Productos Físicos:</strong>
               Los productos enviados para la publicidad o contenido UGC se los queda la creadora.
             </div>
-            <div className="p-2.5 bg-white rounded-xl border border-black/15">
+            <div className="shrink-0 w-[230px] sm:w-auto p-2.5 bg-white rounded-xl border border-black/15">
               <strong className="text-slate-900 block mb-0.5">⏱️ Duración:</strong>
               Máximo 1 minuto por video incluido en tarifa base. Tiempos superiores con recargo.
             </div>
-            <div className="p-2.5 bg-white rounded-xl border border-black/15">
+            <div className="shrink-0 w-[230px] sm:w-auto p-2.5 bg-white rounded-xl border border-black/15">
               <strong className="text-slate-900 block mb-0.5">👗 Límites:</strong>
               Videos pensados para un máximo de hasta 3 prendas o 1 producto por pieza.
             </div>
-            <div className="p-2.5 bg-white rounded-xl border border-black/15">
+            <div className="shrink-0 w-[230px] sm:w-auto p-2.5 bg-white rounded-xl border border-black/15">
               <strong className="text-slate-900 block mb-0.5">✨ Modificaciones:</strong>
               Incluye 1 ronda de correcciones menores sin costo adicional tras la entrega.
             </div>
