@@ -331,10 +331,6 @@ export const CircularPhotoCarousel: React.FC = () => {
           <h2 className="font-chunky text-3xl sm:text-4xl md:text-5xl text-ugc-pink tracking-tight drop-shadow-[2px_3px_0px_#B4D9F4]">
             ✨ Galería Visual & Sesiones de Fotos
           </h2>
-
-          <p className="font-sans text-xs sm:text-sm text-slate-600 max-w-lg mx-auto font-medium">
-            ← Arrastra con el mouse o dedo para girar la galería en 3D · Haz clic en cualquier foto para enfocarla o ampliarla →
-          </p>
         </div>
 
         {/* 🎡 3D Circular Carousel Container (React Bits Physics) */}

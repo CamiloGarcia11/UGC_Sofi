@@ -9,7 +9,6 @@ import {
   Award,
   Maximize2,
   X,
-  Sparkles,
   MessageCircle
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -70,10 +69,6 @@ export const CMHero: React.FC<CMHeroProps> = ({
               Cruz
             </span>
           </div>
-
-          <p className="font-sans text-xs sm:text-sm text-slate-700 max-w-md mt-2 font-medium leading-relaxed">
-            Manejo integral de tus redes, creación de contenido que conecta y estrategias sencillas para que consigas más clientes todos los días.
-          </p>
 
           {/* Official CM Palette Colorway Blocks Bar */}
           <div className="flex items-center gap-1.5 mt-3 p-1 bg-white rounded-full border border-cm-chocolate/20 shadow-sm">
@@ -164,13 +159,6 @@ export const CMHero: React.FC<CMHeroProps> = ({
                 </div>
 
               </div>
-
-              {/* Subtitle Underneath */}
-              <div className="flex items-center justify-center gap-1.5 mt-2.5 text-[11px] font-mono text-slate-500">
-                <Sparkles className="w-3 h-3 text-cm-burgundy" />
-                <span>Sofía Cruz · Toca el afiche para ampliar en alta calidad</span>
-              </div>
-
             </div>
           </div>
 
@@ -187,10 +175,6 @@ export const CMHero: React.FC<CMHeroProps> = ({
               <h2 className="font-editorialSerif text-2xl sm:text-3xl lg:text-4xl font-extrabold text-cm-chocolate tracking-tight leading-[1.15]">
                 Hacemos que tus redes se vean profesionales y <span className="text-cm-burgundy italic">conecten con tu público</span>
               </h2>
-
-              <p className="text-slate-700 text-xs sm:text-[13px] leading-relaxed font-normal">
-                Dejamos de improvisar qué publicar. Diseñamos planes mensuales con contenidos atractivos, cuidamos la imagen de tu negocio y respondemos rápido a tus mensajes.
-              </p>
             </div>
 
             {/* Pilares de Compromiso y Calidad de Servicio */}
@@ -227,9 +211,6 @@ export const CMHero: React.FC<CMHeroProps> = ({
                   <h3 className="font-editorialSerif text-lg sm:text-xl text-cm-chocolate tracking-tight leading-none font-bold">
                     PERFIL DE <span className="text-cm-burgundy">ESTRATEGA & CM</span>
                   </h3>
-                  <p className="text-[10px] sm:text-[11px] text-slate-500 font-sans font-medium mt-0.5">
-                    Sofía Cruz · Gestión profesional de redes para conectar con tu comunidad y hacer crecer tu marca
-                  </p>
                 </div>
 
                 <div className="hidden sm:flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-cm-blue border border-cm-chocolate text-[10px] font-mono font-bold text-cm-chocolate">

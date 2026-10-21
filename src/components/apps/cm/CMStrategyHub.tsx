@@ -166,9 +166,6 @@ export const CMStrategyHub: React.FC = () => {
           <h2 className="font-editorialSerif text-3xl sm:text-4xl text-cm-chocolate tracking-tight">
             Servicios & Metodología Estratégica
           </h2>
-          <p className="text-slate-600 text-xs sm:text-[13px] font-medium max-w-md mx-auto leading-relaxed">
-            Una estructura clara para que tus redes sociales crezcan con coherencia, orden y atracción constante de clientes.
-          </p>
         </div>
 
         {/* Interactive Segmented Switcher & Navigation Controls */}
@@ -274,11 +271,6 @@ export const CMStrategyHub: React.FC = () => {
                   );
                 })}
               </div>
-
-              <div className="flex items-center justify-center gap-2 text-slate-500 text-xs font-mono">
-                <span className="w-1.5 h-1.5 rounded-full bg-cm-burgundy animate-ping" />
-                <span>Desliza para explorar los 6 servicios estratégicos de Community Manager</span>
-              </div>
             </motion.div>
           ) : (
             /* Tab 2: 4 Methodology Phases (Horizontal Slider Track) */
@@ -336,11 +328,6 @@ export const CMStrategyHub: React.FC = () => {
                     </div>
                   );
                 })}
-              </div>
-
-              <div className="flex items-center justify-center gap-2 text-slate-500 text-xs font-mono">
-                <span className="w-1.5 h-1.5 rounded-full bg-cm-burgundy animate-ping" />
-                <span>Desliza para ver las 4 fases de la metodología de trabajo</span>
               </div>
             </motion.div>
           )}

@@ -151,9 +151,6 @@ export const UGCPackages: React.FC = () => {
           <h2 className="font-chunky text-3xl sm:text-4xl md:text-5xl text-ugc-pink tracking-tight drop-shadow-[1px_1px_0px_#B4D9F4]">
             Planes & Tarifas de Contenido UGC
           </h2>
-          <p className="text-slate-600 text-xs sm:text-sm font-medium">
-            Precios claros, sin costos ocultos. Elige el paquete que mejor se adapte a tu campaña o cotiza un formato individual.
-          </p>
         </div>
 
         {/* Packages Navigation Bar */}
@@ -295,11 +292,6 @@ export const UGCPackages: React.FC = () => {
           })}
         </div>
 
-        <div className="flex items-center justify-center gap-2 mb-8 text-slate-500 text-xs font-mono">
-          <span className="w-1.5 h-1.5 rounded-full bg-ugc-pink animate-ping" />
-          <span>Desliza en horizontal para comparar los 3 planes de video UGC</span>
-        </div>
-
         {/* Compact Additional Services & Combos */}
         <div className="mb-10 p-5 sm:p-6 rounded-3xl bg-white border-2 border-black shadow-sticker">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pb-4 mb-4 border-b-2 border-slate-100">
@@ -311,9 +303,6 @@ export const UGCPackages: React.FC = () => {
                 <h4 className="font-chunky text-base sm:text-lg text-slate-900">
                   Servicios Individuales & Combos Especiales
                 </h4>
-                <p className="text-xs text-slate-500 font-medium">
-                  Complementa tu contenido con fotos profesionales o menciones directas en Instagram y TikTok.
-                </p>
               </div>
             </div>
 
@@ -381,11 +370,6 @@ export const UGCPackages: React.FC = () => {
                 </div>
               </div>
             ))}
-          </div>
-
-          <div className="flex items-center justify-center gap-2 mt-3 text-slate-500 text-[11px] font-mono">
-            <span className="w-1.5 h-1.5 rounded-full bg-ugc-pink animate-ping" />
-            <span>Desliza para ver los 4 servicios y combos adicionales</span>
           </div>
         </div>
 

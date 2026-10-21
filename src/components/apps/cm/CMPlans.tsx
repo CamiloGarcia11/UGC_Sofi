@@ -145,9 +145,6 @@ export const CMPlans: React.FC = () => {
           <h2 className="font-editorialSerif text-3xl sm:text-4xl md:text-5xl text-cm-chocolate tracking-tight">
             Planes de Manejo de Redes
           </h2>
-          <p className="text-slate-600 text-xs sm:text-sm font-medium">
-            Elige el plan ideal para que tu negocio tenga orden, publicaciones constantes y una imagen profesional.
-          </p>
         </div>
 
         {/* Plans Navigation Bar */}
@@ -287,11 +284,6 @@ export const CMPlans: React.FC = () => {
           })}
         </div>
 
-        <div className="flex items-center justify-center gap-2 mb-8 text-slate-500 text-xs font-mono">
-          <span className="w-1.5 h-1.5 rounded-full bg-cm-burgundy animate-ping" />
-          <span>Desliza en horizontal para comparar los 3 planes de Community Manager</span>
-        </div>
-
         {/* Media Kit PDF Banner for Community Manager */}
         <div className="mb-14 p-6 rounded-[32px] bg-white border-2 border-cm-chocolate shadow-editorial flex flex-col sm:flex-row items-center justify-between gap-5">
           <div className="space-y-1 text-center sm:text-left">
@@ -302,9 +294,6 @@ export const CMPlans: React.FC = () => {
             <h4 className="font-editorialSerif text-xl sm:text-2xl text-cm-chocolate font-bold">
               Media Kit & Tarifario de Community Manager 2026
             </h4>
-            <p className="text-xs text-slate-600 font-medium max-w-xl">
-              Descarga o visualiza la ficha formal con el alcance detallado de cada plan mensual, tarifas en pesos colombianos y condiciones de trabajo.
-            </p>
           </div>
 
           <div className="flex items-center gap-2.5 shrink-0">
@@ -375,9 +364,6 @@ export const CMPlans: React.FC = () => {
               <h3 className="font-editorialSerif text-2xl sm:text-3xl font-extrabold text-cm-chocolate tracking-tight">
                 Agenda una Asesoría Gratuita de 25 Minutos
               </h3>
-              <p className="text-slate-600 text-xs sm:text-sm leading-relaxed font-medium">
-                Revisamos en vivo tus redes, identificamos oportunidades de mejora en tu perfil y te damos consejos prácticos para aplicar hoy mismo. Sin ningún compromiso.
-              </p>
 
               <div className="space-y-2 pt-2 text-xs text-slate-800 font-medium">
                 <div className="flex items-center gap-2">

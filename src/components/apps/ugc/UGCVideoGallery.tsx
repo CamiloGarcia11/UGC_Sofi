@@ -155,9 +155,6 @@ export const UGCVideoGallery: React.FC = () => {
           <h2 className="font-chunky text-3xl sm:text-4xl text-ugc-pink tracking-tight drop-shadow-[1px_1px_0px_#B4D9F4]">
             Galería de Videos Reales
           </h2>
-          <p className="text-slate-600 text-xs sm:text-sm max-w-lg mx-auto font-medium">
-            Toca cualquier video para reproducir. El video se aprecia completo, limpio y sin obstrucciones.
-          </p>
         </div>
 
         {/* Category Filter Pills & Navigation Controls */}
@@ -389,12 +386,6 @@ export const UGCVideoGallery: React.FC = () => {
               );
             })}
           </AnimatePresence>
-        </div>
-
-        {/* Swipe Hint for touch devices */}
-        <div className="flex items-center justify-center gap-2 mt-1 text-slate-500 text-xs font-mono">
-          <span className="w-1.5 h-1.5 rounded-full bg-ugc-pink animate-ping" />
-          <span>Arrastra o usa las flechas para explorar los {filteredProjects.length} videos en horizontal</span>
         </div>
 
       </div>

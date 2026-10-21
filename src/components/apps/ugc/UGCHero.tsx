@@ -221,12 +221,8 @@ export const UGCHero: React.FC<UGCHeroProps> = ({ onExploreGallery, onOpenQuote,
             </span>
           </div>
 
-          <p className="font-sans text-xs sm:text-sm text-slate-600 max-w-md mt-2 font-medium">
-            Creadora de Contenido UGC & Estratega Visual · Creando y diseñando marcas desde el 2021.
-          </p>
-
           {/* Brand Palette Colorway Blocks Bar */}
-          <div className="flex items-center gap-1.5 mt-3 p-1 bg-white rounded-full border border-slate-200 shadow-sm">
+          <div className="flex items-center gap-1.5 mt-2 p-1 bg-white rounded-full border border-slate-200 shadow-sm">
             <div className="flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-ugc-pink text-white font-chunky text-[10px]">
               <span>Sofía</span>
               <span className="font-script text-ugc-yellow text-xs font-normal">Cruz</span>
@@ -508,10 +504,6 @@ export const UGCHero: React.FC<UGCHeroProps> = ({ onExploreGallery, onOpenQuote,
                 Resultados & Alcance Comprobado
               </h3>
             </div>
-
-            <p className="text-xs text-slate-600 font-medium max-w-xs text-left sm:text-right">
-              Datos extraídos directamente de analítica oficial de TikTok: audiencia real interesada en tus productos.
-            </p>
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4">

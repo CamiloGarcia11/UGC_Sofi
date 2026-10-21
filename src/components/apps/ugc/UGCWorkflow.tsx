@@ -140,10 +140,6 @@ export const UGCWorkflow: React.FC = () => {
               (paso a paso)
             </div>
           </div>
-
-          <p className="text-slate-600 text-xs sm:text-[13px] font-medium max-w-md mx-auto pt-1 leading-relaxed">
-            Combino psicología del consumidor, edición rítmica y narrativa persuasiva para lograr conversiones reales en menos de 5 días.
-          </p>
         </div>
 
         {/* Interactive Segmented Switcher & Navigation Controls */}
@@ -257,11 +253,6 @@ export const UGCWorkflow: React.FC = () => {
                   );
                 })}
               </div>
-
-              <div className="flex items-center justify-center gap-2 text-slate-500 text-xs font-mono">
-                <span className="w-1.5 h-1.5 rounded-full bg-ugc-pink animate-ping" />
-                <span>Desliza para ver los 4 pasos del proceso (Día 1 al 5)</span>
-              </div>
             </motion.div>
           ) : (
             <motion.div
@@ -309,11 +300,6 @@ export const UGCWorkflow: React.FC = () => {
                 })}
               </div>
 
-              <div className="flex items-center justify-center gap-2 text-slate-500 text-xs font-mono">
-                <span className="w-1.5 h-1.5 rounded-full bg-ugc-pink animate-ping" />
-                <span>Desliza para ver los 4 beneficios clave de trabajar con Sofía</span>
-              </div>
-
               {/* UGC vs Traditional Comparison Mini Banner */}
               <div className="p-4 sm:p-5 rounded-2xl bg-white border-2 border-black shadow-sticker flex flex-col md:flex-row items-center justify-between gap-4">
                 <div className="space-y-1 text-center md:text-left">
@@ -323,9 +309,6 @@ export const UGCWorkflow: React.FC = () => {
                   <h4 className="font-chunky text-sm sm:text-base text-slate-900">
                     ¿Por qué el contenido de Sofía convierte más?
                   </h4>
-                  <p className="text-xs text-slate-600 font-medium">
-                    La gente ya no cree en comerciales perfectos. Prefiere ver personas reales usando productos reales.
-                  </p>
                 </div>
 
                 <div className="flex items-center gap-3 shrink-0">
