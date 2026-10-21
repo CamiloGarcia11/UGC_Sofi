@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { 
   Check, 
   Calendar, 
@@ -7,7 +7,9 @@ import {
   Building,
   Download,
   Eye,
-  FileText
+  FileText,
+  ChevronLeft,
+  ChevronRight
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import type { CMPlan } from '../../../types/cm';
@@ -73,6 +75,14 @@ export const CMPlans: React.FC = () => {
   const [bookingCompany, setBookingCompany] = useState<string>('');
   const [bookingDate, setBookingDate] = useState<string>('');
   const [showBookingSuccess, setShowBookingSuccess] = useState<boolean>(false);
+  const plansScrollRef = useRef<HTMLDivElement>(null);
+
+  const scrollPlans = (direction: 'left' | 'right') => {
+    if (plansScrollRef.current) {
+      const scrollAmount = direction === 'left' ? -350 : 350;
+      plansScrollRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    }
+  };
 
   const handleSelectPlan = (plan: CMPlan) => {
     setSelectedPlanId(plan.id);
@@ -140,38 +150,70 @@ export const CMPlans: React.FC = () => {
           </p>
         </div>
 
-        {/* Mobile Switcher for CM Plans */}
-        <div className="flex lg:hidden items-center justify-center gap-1.5 mb-6 overflow-x-auto no-scrollbar py-1">
-          {CM_PLANS.map((p) => (
+        {/* Plans Navigation Bar */}
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-3 mb-6">
+          <div className="flex items-center gap-2 overflow-x-auto no-scrollbar py-1">
+            {CM_PLANS.map((p) => (
+              <button
+                key={p.id}
+                onClick={() => {
+                  setSelectedPlanId(p.id);
+                  const el = document.getElementById(`cm-plan-${p.id}`);
+                  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                }}
+                className={`px-3.5 py-1.5 rounded-xl font-editorialSerif font-bold text-xs uppercase tracking-wider border-2 border-cm-chocolate transition-all cursor-pointer ${
+                  selectedPlanId === p.id
+                    ? 'bg-cm-burgundy text-white shadow-sticker-burgundy -translate-y-0.5'
+                    : 'bg-white text-cm-chocolate hover:bg-cm-blue shadow-sm'
+                }`}
+              >
+                <span>{p.name}</span>
+              </button>
+            ))}
+          </div>
+
+          <div className="flex items-center gap-2">
+            <span className="text-[11px] font-bold text-slate-600 font-mono hidden sm:inline">
+              ← Desliza planes →
+            </span>
             <button
-              key={p.id}
-              onClick={() => setSelectedPlanId(p.id)}
-              className={`px-3 py-1.5 rounded-xl font-editorialSerif font-bold text-[11px] uppercase tracking-wider border-2 border-cm-chocolate transition-all ${
-                selectedPlanId === p.id
-                  ? 'bg-cm-burgundy text-white shadow-sticker-burgundy'
-                  : 'bg-white text-cm-chocolate'
-              }`}
+              onClick={() => scrollPlans('left')}
+              className="p-2 sm:p-2.5 rounded-full bg-white hover:bg-cm-yellow text-cm-chocolate border-2 border-cm-chocolate shadow-[2px_2px_0px_#3C2722] active:translate-x-0.5 active:translate-y-0.5 transition-all cursor-pointer"
+              title="Plan anterior"
+              aria-label="Plan anterior"
             >
-              <span>{p.name}</span>
+              <ChevronLeft className="w-4 h-4" />
             </button>
-          ))}
+            <button
+              onClick={() => scrollPlans('right')}
+              className="p-2 sm:p-2.5 rounded-full bg-white hover:bg-cm-yellow text-cm-chocolate border-2 border-cm-chocolate shadow-[2px_2px_0px_#3C2722] active:translate-x-0.5 active:translate-y-0.5 transition-all cursor-pointer"
+              title="Plan siguiente"
+              aria-label="Plan siguiente"
+            >
+              <ChevronRight className="w-4 h-4" />
+            </button>
+          </div>
         </div>
 
-        {/* Plans 3-Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8 items-stretch mb-8 sm:mb-10">
+        {/* Plans Horizontal Carousel Track */}
+        <div 
+          ref={plansScrollRef}
+          className="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-6 pt-3 px-1 no-scrollbar scroll-smooth mb-2"
+        >
           {CM_PLANS.map((plan) => {
             const isRec = plan.recommended;
             const isSelected = selectedPlanId === plan.id;
 
             return (
               <div
+                id={`cm-plan-${plan.id}`}
                 key={plan.id}
                 onClick={() => setSelectedPlanId(plan.id)}
-                className={`relative rounded-[32px] p-5 sm:p-7 flex flex-col justify-between transition-all duration-300 cursor-pointer border-2 border-cm-chocolate ${
+                className={`shrink-0 w-[285px] sm:w-[330px] md:w-[350px] snap-center relative rounded-[32px] p-5 sm:p-7 flex flex-col justify-between transition-all duration-300 cursor-pointer border-2 border-cm-chocolate ${
                   isSelected ? 'ring-2 ring-cm-burgundy' : ''
                 } ${
                   isRec
-                    ? 'bg-white shadow-[6px_6px_0px_#891731] ring-4 ring-cm-burgundy/20 lg:-translate-y-2'
+                    ? 'bg-white shadow-[6px_6px_0px_#891731] ring-4 ring-cm-burgundy/20'
                     : isSelected
                     ? 'bg-white shadow-[6px_6px_0px_#3C2722]'
                     : 'bg-[#fffdf9] hover:bg-white shadow-sticker-burgundy'
@@ -245,6 +287,11 @@ export const CMPlans: React.FC = () => {
           })}
         </div>
 
+        <div className="flex items-center justify-center gap-2 mb-8 text-slate-500 text-xs font-mono">
+          <span className="w-1.5 h-1.5 rounded-full bg-cm-burgundy animate-ping" />
+          <span>Desliza en horizontal para comparar los 3 planes de Community Manager</span>
+        </div>
+
         {/* Media Kit PDF Banner for Community Manager */}
         <div className="mb-14 p-6 rounded-[32px] bg-white border-2 border-cm-chocolate shadow-editorial flex flex-col sm:flex-row items-center justify-between gap-5">
           <div className="space-y-1 text-center sm:text-left">
@@ -281,7 +328,7 @@ export const CMPlans: React.FC = () => {
         </div>
 
         {/* Términos y Condiciones del Servicio */}
-        <div className="mb-16 rounded-[28px] bg-[#FFF9ED] border-2 border-cm-chocolate p-6 sm:p-8 text-xs text-slate-700 shadow-sm">
+        <div id="cm-terms" className="mb-16 rounded-[28px] bg-[#FFF9ED] border-2 border-cm-chocolate p-6 sm:p-8 text-xs text-slate-700 shadow-sm">
           <div className="flex items-center gap-2 mb-4 pb-2 border-b border-cm-chocolate/15">
             <FileText className="w-4 h-4 text-cm-burgundy" />
             <span className="font-editorialSerif text-base text-cm-chocolate font-bold uppercase tracking-wide">
@@ -289,28 +336,28 @@ export const CMPlans: React.FC = () => {
             </span>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 text-xs">
-            <div className="p-3.5 bg-white rounded-2xl border border-cm-chocolate/20">
+          <div className="flex overflow-x-auto sm:grid sm:grid-cols-2 lg:grid-cols-3 gap-3.5 text-xs no-scrollbar pb-1">
+            <div className="shrink-0 w-[240px] sm:w-auto p-3.5 bg-white rounded-2xl border border-cm-chocolate/20">
               <strong className="text-cm-chocolate block mb-1">📅 Aprobación de Contenido:</strong>
               Se entrega un calendario de publicaciones al inicio de cada periodo para revisión y aprobación en un plazo máximo de 48 horas.
             </div>
 
-            <div className="p-3.5 bg-white rounded-2xl border border-cm-chocolate/20">
+            <div className="shrink-0 w-[240px] sm:w-auto p-3.5 bg-white rounded-2xl border border-cm-chocolate/20">
               <strong className="text-cm-chocolate block mb-1">📍 Visitas Presenciales (Cúcuta):</strong>
               Si se requiere desplazamiento presencial al local o sitio de trabajo para producción de video, cada visita adicional tiene un valor de <strong>$60.000 COP</strong>.
             </div>
 
-            <div className="p-3.5 bg-white rounded-2xl border border-cm-chocolate/20">
+            <div className="shrink-0 w-[240px] sm:w-auto p-3.5 bg-white rounded-2xl border border-cm-chocolate/20">
               <strong className="text-cm-chocolate block mb-1">⏰ Horarios de Atención:</strong>
               La gestión de comunidad y respuesta a mensajes se realiza de lunes a viernes en horario de oficina acordado.
             </div>
 
-            <div className="p-3.5 bg-white rounded-2xl border border-cm-chocolate/20">
+            <div className="shrink-0 w-[240px] sm:w-auto p-3.5 bg-white rounded-2xl border border-cm-chocolate/20">
               <strong className="text-cm-chocolate block mb-1">📣 Publicidad Paga:</strong>
               Los presupuestos, configuración o gestión de pauta publicitaria en plataformas de anuncios se cobran por separado.
             </div>
 
-            <div className="p-3.5 bg-white rounded-2xl border border-cm-chocolate/20 md:col-span-2 lg:col-span-2">
+            <div className="shrink-0 w-[240px] sm:w-auto p-3.5 bg-white rounded-2xl border border-cm-chocolate/20 md:col-span-2 lg:col-span-2">
               <strong className="text-cm-chocolate block mb-1">💳 Forma de Pago:</strong>
               50% de anticipo al iniciar el periodo de trabajo y 50% restante a mitad de mes o contra entrega acordada.
             </div>

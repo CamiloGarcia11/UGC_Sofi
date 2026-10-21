@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { 
   Compass, 
   CalendarDays, 
@@ -12,7 +12,9 @@ import {
   BarChart, 
   CheckCircle2, 
   Shield, 
-  Clock 
+  Clock,
+  ChevronLeft,
+  ChevronRight
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import type { CMService } from '../../../types/cm';
@@ -129,6 +131,14 @@ const CM_PHASES = [
 
 export const CMStrategyHub: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'services' | 'methodology'>('services');
+  const strategyScrollRef = useRef<HTMLDivElement>(null);
+
+  const scrollTrack = (direction: 'left' | 'right') => {
+    if (strategyScrollRef.current) {
+      const scrollAmount = direction === 'left' ? -320 : 320;
+      strategyScrollRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    }
+  };
 
   const getIcon = (iconName: string) => {
     switch (iconName) {
@@ -161,34 +171,59 @@ export const CMStrategyHub: React.FC = () => {
           </p>
         </div>
 
-        {/* Interactive Segmented Switcher */}
-        <div className="flex items-center justify-center gap-2 pt-1">
-          <button
-            onClick={() => setActiveTab('services')}
-            className={`px-4 sm:px-5 py-2 rounded-2xl font-editorialSerif font-bold text-xs uppercase tracking-wider border-2 border-cm-chocolate transition-all flex items-center gap-1.5 cursor-pointer ${
-              activeTab === 'services'
-                ? 'bg-cm-burgundy text-white shadow-sticker-burgundy -translate-y-0.5'
-                : 'bg-[#FAF5EA] text-cm-chocolate hover:bg-cm-blue shadow-sm'
-            }`}
-          >
-            <Compass className="w-3.5 h-3.5" />
-            <span>6 Servicios Estratégicos</span>
-          </button>
+        {/* Interactive Segmented Switcher & Navigation Controls */}
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-1">
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => setActiveTab('services')}
+              className={`px-3.5 sm:px-4 py-2 rounded-2xl font-editorialSerif font-bold text-xs uppercase tracking-wider border-2 border-cm-chocolate transition-all flex items-center gap-1.5 cursor-pointer ${
+                activeTab === 'services'
+                  ? 'bg-cm-burgundy text-white shadow-sticker-burgundy -translate-y-0.5'
+                  : 'bg-[#FAF5EA] text-cm-chocolate hover:bg-cm-blue shadow-sm'
+              }`}
+            >
+              <Compass className="w-3.5 h-3.5" />
+              <span>6 Servicios Estratégicos</span>
+            </button>
 
-          <button
-            onClick={() => setActiveTab('methodology')}
-            className={`px-4 sm:px-5 py-2 rounded-2xl font-editorialSerif font-bold text-xs uppercase tracking-wider border-2 border-cm-chocolate transition-all flex items-center gap-1.5 cursor-pointer ${
-              activeTab === 'methodology'
-                ? 'bg-cm-burgundy text-white shadow-sticker-burgundy -translate-y-0.5'
-                : 'bg-[#FAF5EA] text-cm-chocolate hover:bg-cm-blue shadow-sm'
-            }`}
-          >
-            <Clock className="w-3.5 h-3.5" />
-            <span>Metodología en 4 Fases</span>
-          </button>
+            <button
+              onClick={() => setActiveTab('methodology')}
+              className={`px-3.5 sm:px-4 py-2 rounded-2xl font-editorialSerif font-bold text-xs uppercase tracking-wider border-2 border-cm-chocolate transition-all flex items-center gap-1.5 cursor-pointer ${
+                activeTab === 'methodology'
+                  ? 'bg-cm-burgundy text-white shadow-sticker-burgundy -translate-y-0.5'
+                  : 'bg-[#FAF5EA] text-cm-chocolate hover:bg-cm-blue shadow-sm'
+              }`}
+            >
+              <Clock className="w-3.5 h-3.5" />
+              <span>Metodología en 4 Fases</span>
+            </button>
+          </div>
+
+          {/* Prev / Next Arrows */}
+          <div className="flex items-center gap-2">
+            <span className="text-[11px] font-bold text-slate-600 font-mono hidden sm:inline">
+              ← Desliza horizontal →
+            </span>
+            <button
+              onClick={() => scrollTrack('left')}
+              className="p-2 rounded-full bg-white hover:bg-cm-yellow text-cm-chocolate border-2 border-cm-chocolate shadow-[2px_2px_0px_#3C2722] active:translate-x-0.5 active:translate-y-0.5 transition-all cursor-pointer"
+              title="Anterior"
+              aria-label="Anterior"
+            >
+              <ChevronLeft className="w-4 h-4" />
+            </button>
+            <button
+              onClick={() => scrollTrack('right')}
+              className="p-2 rounded-full bg-white hover:bg-cm-yellow text-cm-chocolate border-2 border-cm-chocolate shadow-[2px_2px_0px_#3C2722] active:translate-x-0.5 active:translate-y-0.5 transition-all cursor-pointer"
+              title="Siguiente"
+              aria-label="Siguiente"
+            >
+              <ChevronRight className="w-4 h-4" />
+            </button>
+          </div>
         </div>
 
-        {/* Tab 1: 6 Strategic Services */}
+        {/* Tab 1: 6 Strategic Services (Horizontal Slider Track) */}
         <AnimatePresence mode="wait">
           {activeTab === 'services' ? (
             <motion.div
@@ -197,96 +232,116 @@ export const CMStrategyHub: React.FC = () => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.2 }}
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
+              className="space-y-3"
             >
-              {CM_SERVICES.map((service) => {
-                const Icon = getIcon(service.icon);
-                return (
-                  <div 
-                    key={service.id}
-                    className="relative rounded-[26px] bg-[#FAF5EA] border-2 border-cm-chocolate p-4 sm:p-5 flex flex-col justify-between shadow-sticker-burgundy hover:shadow-editorial transition-all duration-300 group"
-                  >
-                    <div>
-                      <div className="w-10 h-10 rounded-xl bg-white border-2 border-cm-chocolate flex items-center justify-center text-cm-burgundy shadow-sm mb-3">
-                        <Icon className="w-5 h-5" />
+              <div 
+                ref={strategyScrollRef}
+                className="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-4 pt-1 px-1 no-scrollbar scroll-smooth"
+              >
+                {CM_SERVICES.map((service) => {
+                  const Icon = getIcon(service.icon);
+                  return (
+                    <div 
+                      key={service.id}
+                      className="shrink-0 w-[275px] sm:w-[310px] md:w-[330px] snap-center relative rounded-[26px] bg-[#FAF5EA] border-2 border-cm-chocolate p-4 sm:p-5 flex flex-col justify-between shadow-sticker-burgundy hover:shadow-editorial transition-all duration-300 group"
+                    >
+                      <div>
+                        <div className="w-10 h-10 rounded-xl bg-white border-2 border-cm-chocolate flex items-center justify-center text-cm-burgundy shadow-sm mb-3">
+                          <Icon className="w-5 h-5" />
+                        </div>
+
+                        <h3 className="font-editorialSerif text-base sm:text-lg font-bold text-cm-chocolate mb-1.5 group-hover:text-cm-burgundy transition-colors">
+                          {service.title}
+                        </h3>
+
+                        <p className="text-xs text-slate-700 leading-relaxed mb-3 font-medium">
+                          {service.description}
+                        </p>
                       </div>
 
-                      <h3 className="font-editorialSerif text-base sm:text-lg font-bold text-cm-chocolate mb-1.5 group-hover:text-cm-burgundy transition-colors">
-                        {service.title}
-                      </h3>
-
-                      <p className="text-xs text-slate-700 leading-relaxed mb-3 font-medium">
-                        {service.description}
-                      </p>
+                      <div className="pt-2.5 border-t border-cm-chocolate/15 space-y-1">
+                        <span className="text-[10px] font-mono font-bold text-cm-burgundy uppercase tracking-wider block">
+                          Entregables clave:
+                        </span>
+                        {service.deliverables.map((item, i) => (
+                          <div key={i} className="flex items-start gap-1.5 text-[11px] text-slate-800 font-medium leading-tight">
+                            <CheckCircle2 className="w-3 h-3 text-emerald-700 shrink-0 mt-0.5" />
+                            <span>{item}</span>
+                          </div>
+                        ))}
+                      </div>
                     </div>
+                  );
+                })}
+              </div>
 
-                    <div className="pt-2.5 border-t border-cm-chocolate/15 space-y-1">
-                      <span className="text-[10px] font-mono font-bold text-cm-burgundy uppercase tracking-wider block">
-                        Entregables clave:
-                      </span>
-                      {service.deliverables.map((item, i) => (
-                        <div key={i} className="flex items-start gap-1.5 text-[11px] text-slate-800 font-medium leading-tight">
-                          <CheckCircle2 className="w-3 h-3 text-emerald-700 shrink-0 mt-0.5" />
-                          <span>{item}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                );
-              })}
+              <div className="flex items-center justify-center gap-2 text-slate-500 text-xs font-mono">
+                <span className="w-1.5 h-1.5 rounded-full bg-cm-burgundy animate-ping" />
+                <span>Desliza para explorar los 6 servicios estratégicos de Community Manager</span>
+              </div>
             </motion.div>
           ) : (
-            /* Tab 2: 4 Methodology Phases */
+            /* Tab 2: 4 Methodology Phases (Horizontal Slider Track) */
             <motion.div
               key="cm-methodology"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.2 }}
-              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"
+              className="space-y-3"
             >
-              {CM_PHASES.map((p, idx) => {
-                const Icon = p.icon;
-                return (
-                  <div
-                    key={idx}
-                    className="relative rounded-[26px] bg-[#FAF5EA] border-2 border-cm-chocolate p-4 sm:p-5 flex flex-col justify-between shadow-sticker-burgundy hover:shadow-editorial transition-all group"
-                  >
-                    <div>
-                      <div className="flex items-center justify-between mb-3">
-                        <span className="font-editorialSerif text-2xl font-bold text-cm-burgundy">
-                          {p.phase}
-                        </span>
-                        <span className="flex items-center gap-1 text-[10px] font-mono font-bold px-2 py-0.5 rounded-full bg-white border border-cm-chocolate text-slate-800 shadow-sm">
-                          <Clock className="w-3 h-3 text-cm-burgundy" />
-                          {p.timeframe}
-                        </span>
+              <div 
+                ref={strategyScrollRef}
+                className="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-4 pt-1 px-1 no-scrollbar scroll-smooth"
+              >
+                {CM_PHASES.map((p, idx) => {
+                  const Icon = p.icon;
+                  return (
+                    <div
+                      key={idx}
+                      className="shrink-0 w-[270px] sm:w-[295px] md:w-[310px] snap-center relative rounded-[26px] bg-[#FAF5EA] border-2 border-cm-chocolate p-4 sm:p-5 flex flex-col justify-between shadow-sticker-burgundy hover:shadow-editorial transition-all group"
+                    >
+                      <div>
+                        <div className="flex items-center justify-between mb-3">
+                          <span className="font-editorialSerif text-2xl font-bold text-cm-burgundy">
+                            {p.phase}
+                          </span>
+                          <span className="flex items-center gap-1 text-[10px] font-mono font-bold px-2 py-0.5 rounded-full bg-white border border-cm-chocolate text-slate-800 shadow-sm">
+                            <Clock className="w-3 h-3 text-cm-burgundy" />
+                            {p.timeframe}
+                          </span>
+                        </div>
+
+                        <div className="w-10 h-10 rounded-xl bg-white border-2 border-cm-chocolate flex items-center justify-center text-cm-burgundy shadow-sm mb-2.5">
+                          <Icon className="w-5 h-5" />
+                        </div>
+
+                        <h3 className="font-editorialSerif text-base font-bold text-cm-chocolate mb-1.5 group-hover:text-cm-burgundy transition-colors">
+                          {p.title}
+                        </h3>
+
+                        <p className="text-xs text-slate-700 leading-relaxed mb-3 font-medium">
+                          {p.description}
+                        </p>
                       </div>
 
-                      <div className="w-10 h-10 rounded-xl bg-white border-2 border-cm-chocolate flex items-center justify-center text-cm-burgundy shadow-sm mb-2.5">
-                        <Icon className="w-5 h-5" />
+                      <div className="pt-2.5 border-t border-cm-chocolate/15">
+                        <span className="text-[10px] font-mono font-bold text-cm-burgundy uppercase tracking-wider block mb-0.5">
+                          Entregable:
+                        </span>
+                        <p className="text-[11px] font-bold text-slate-900 leading-tight">
+                          {p.deliverable}
+                        </p>
                       </div>
-
-                      <h3 className="font-editorialSerif text-base font-bold text-cm-chocolate mb-1.5 group-hover:text-cm-burgundy transition-colors">
-                        {p.title}
-                      </h3>
-
-                      <p className="text-xs text-slate-700 leading-relaxed mb-3 font-medium">
-                        {p.description}
-                      </p>
                     </div>
+                  );
+                })}
+              </div>
 
-                    <div className="pt-2.5 border-t border-cm-chocolate/15">
-                      <span className="text-[10px] font-mono font-bold text-cm-burgundy uppercase tracking-wider block mb-0.5">
-                        Entregable:
-                      </span>
-                      <p className="text-[11px] font-bold text-slate-900 leading-tight">
-                        {p.deliverable}
-                      </p>
-                    </div>
-                  </div>
-                );
-              })}
+              <div className="flex items-center justify-center gap-2 text-slate-500 text-xs font-mono">
+                <span className="w-1.5 h-1.5 rounded-full bg-cm-burgundy animate-ping" />
+                <span>Desliza para ver las 4 fases de la metodología de trabajo</span>
+              </div>
             </motion.div>
           )}
         </AnimatePresence>
