@@ -23,19 +23,6 @@ interface UGCHeroProps {
   onExploreStats?: () => void;
 }
 
-const UGC_PROFILE_ROWS = [
-  { label: "NICHOS PRINCIPALES", value: "Belleza, Cuidado Facial (Skincare), Moda, Estilo de Vida & Gadgets" },
-  { label: "MÉTRICAS TIKTOK", value: "+158.8K Reproducciones · 5.8K Likes · 723 Compartidos · Picos de 15.6K vistas" },
-  { label: "CÓMO SE SIENTE", value: "Cercano, natural y honesto (como el consejo de una amiga, cero pose de anuncio)" },
-  { label: "TIPOS DE VIDEO", value: "Videos verticales para celular (Reels y TikTok), probando tu producto y fotos reales" },
-  { label: "IDIOMAS", value: "Español (Nativo) · Inglés (Fluido para marcas de cualquier país)" },
-  { label: "FORMAS DE TRABAJO", value: "Videos para tus redes, menciones en mi cuenta y videos listos para tus anuncios" },
-  { label: "ENTREGAS & ENVÍOS", value: "Entrega súper rápida (3 a 5 días) · Recibo productos de cualquier ciudad o país" },
-  { label: "A QUIÉN LE LLEGA", value: "Mujeres de 18 a 35 años que compran seguido por internet" },
-  { label: "DÓNDE SE PUBLICA", value: "TikTok, Instagram Reels, YouTube Shorts y anuncios pagos en redes" },
-  { label: "EL SECRETO DEL VIDEO", value: "Los primeros 3 segundos atrapan a la gente para que no pase de largo y quiera comprar" },
-];
-
 // 📎 Clip metálico de carnet / binder clip con asas plateadas realistas
 const BinderClipSVG: React.FC<{ className?: string }> = ({ className = "w-14 h-12" }) => (
   <svg 
@@ -372,77 +359,89 @@ export const UGCHero: React.FC<UGCHeroProps> = ({ onExploreGallery, onOpenQuote,
             </div>
           </div>
 
-          {/* RIGHT: COMPACT "PERFIL DE CREADORA" CARD (TOTALMENTE EN ESPAÑOL CON GANCHOS) */}
+          {/* RIGHT: SHORT & DIRECT PRESENTATION CARD (DIRECTA Y BREVE) */}
           <div className="lg:col-span-7 flex flex-col justify-center">
             
             <div className="relative w-full bg-white rounded-3xl border-3 border-black shadow-[8px_8px_0px_#000000] p-5 sm:p-6 transition-all">
               
-              {/* Top Washi Tape Sticker holding the sheet */}
-              <div className="absolute -top-3 left-8 z-20">
-                <div className="px-4 py-0.5 bg-ugc-yellow/95 border border-black/30 text-[9px] font-mono uppercase tracking-widest text-slate-800 shadow-sm font-bold transform -rotate-1">
-                  // SOFÍA CRUZ · FICHA TÉCNICA UGC
+              {/* Top Washi Tape Sticker */}
+              <div className="absolute -top-3.5 left-8 z-20">
+                <div className="px-3.5 py-1 bg-ugc-yellow border-2 border-black text-[10px] font-mono uppercase tracking-wider text-slate-900 shadow-sm font-bold transform -rotate-1 rounded-md flex items-center gap-1.5">
+                  <Sparkles className="w-3 h-3 text-ugc-pink" />
+                  <span>HOLA, SOY SOFÍA ✨</span>
                 </div>
               </div>
 
-              {/* Header inside the compact sheet */}
-              <div className="flex items-center justify-between pb-3 border-b-2 border-slate-900/10">
+              {/* Header & Tagline */}
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3.5 border-b-2 border-slate-900/10 pt-1">
                 <div>
-                  <h3 className="font-chunky text-xl sm:text-2xl text-slate-900 tracking-tight leading-none">
-                    PERFIL DE <span className="text-ugc-pink drop-shadow-[1px_1px_0px_#FEF49B]">CREADORA</span>
+                  <h3 className="font-chunky text-2xl sm:text-3xl text-slate-900 tracking-tight leading-tight">
+                    ¡Hola! Soy <span className="text-ugc-pink drop-shadow-[1px_1px_0px_#B4D9F4]">Sofía Cruz</span> 👋
                   </h3>
-                  <p className="text-[11px] text-slate-500 font-sans font-medium mt-0.5">
-                    Sofía Cruz · Videos auténticos que frenan el scroll y multiplican tus ventas
+                  <p className="text-xs sm:text-[13px] text-ugc-berry font-bold mt-0.5">
+                    Creadora de Contenido UGC & Estratega Visual
                   </p>
                 </div>
 
-                <div className="hidden sm:flex items-center gap-1 px-2.5 py-1 rounded-full bg-ugc-blue/40 border border-black text-[10px] font-mono font-bold text-slate-900">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-ugc-blue/40 border-2 border-black text-[10px] font-mono font-bold text-slate-900 w-fit">
+                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
                   <span>AGENDA ABIERTA 2026</span>
                 </div>
               </div>
 
-              {/* Compact Ruled Specs Rows (Exact reference table, compressed and clean) */}
-              <div className="divide-y divide-slate-900/10 text-xs mt-1">
-                {UGC_PROFILE_ROWS.map((row, index) => (
-                  <div 
-                    key={index}
-                    className="grid grid-cols-1 sm:grid-cols-12 gap-1 sm:gap-2 py-1.5 sm:py-2 items-baseline hover:bg-slate-50 px-1.5 rounded transition-colors"
-                  >
-                    <div className="sm:col-span-4 flex items-center gap-1">
-                      <span className="text-ugc-pink text-[10px]">▪</span>
-                      <span className="font-chunky text-[11px] text-slate-900 tracking-wide uppercase">
-                        {row.label}
-                      </span>
-                    </div>
+              {/* Short & Direct Intro (Directo, breve y sin rodeos) */}
+              <div className="py-3.5 space-y-3 text-slate-700 text-xs sm:text-sm leading-relaxed font-medium">
+                <p>
+                  Ayudo a marcas de <strong>moda, belleza y estilo de vida</strong> a conectar con personas reales a través de videos dinámicos para TikTok y Reels, creados para frenar el scroll y multiplicar tus ventas de forma auténtica.
+                </p>
 
-                    <div className="sm:col-span-8">
-                      <span className="font-sans text-[11px] sm:text-xs text-slate-700 font-medium">
-                        {row.value}
-                      </span>
+                {/* 3 Quick Benefit Pills (Visual, directo, fácil de leer en 3 segundos) */}
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 pt-1">
+                  <div className="p-2.5 rounded-2xl bg-[#FBF8EF] border-2 border-black flex items-center gap-2 shadow-xs">
+                    <span className="text-xl">🎬</span>
+                    <div>
+                      <strong className="block text-slate-900 text-xs leading-tight font-bold">Videos 9:16</strong>
+                      <span className="text-[10px] text-slate-500 font-sans">TikTok & Reels</span>
                     </div>
                   </div>
-                ))}
+
+                  <div className="p-2.5 rounded-2xl bg-[#FBF8EF] border-2 border-black flex items-center gap-2 shadow-xs">
+                    <span className="text-xl">⏱️</span>
+                    <div>
+                      <strong className="block text-slate-900 text-xs leading-tight font-bold">Entrega Ágil</strong>
+                      <span className="text-[10px] text-slate-500 font-sans">3 a 5 días hábiles</span>
+                    </div>
+                  </div>
+
+                  <div className="p-2.5 rounded-2xl bg-[#FBF8EF] border-2 border-black flex items-center gap-2 shadow-xs">
+                    <span className="text-xl">🔥</span>
+                    <div>
+                      <strong className="block text-slate-900 text-xs leading-tight font-bold">+158.8K Vistas</strong>
+                      <span className="text-[10px] text-slate-500 font-sans">Alcance real</span>
+                    </div>
+                  </div>
+                </div>
               </div>
 
-              {/* Bottom CTAs & Guarantee Bar */}
-              <div className="mt-4 pt-3.5 border-t-2 border-slate-900/10 flex flex-wrap items-center justify-between gap-3">
+              {/* Bottom CTAs & Rights Note */}
+              <div className="pt-3 border-t-2 border-slate-900/10 flex flex-wrap items-center justify-between gap-3">
                 <div className="flex items-center gap-1.5 text-[11px] text-emerald-800 font-semibold font-sans">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
-                  <span>Derechos incluidos: Usa los videos en tus redes y anuncios sin costos extras</span>
+                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                  <span>Uso comercial y derechos de pauta incluidos</span>
                 </div>
 
                 <div className="flex items-center gap-2">
                   <button
                     onClick={onExploreGallery}
-                    className="px-3.5 py-1.5 rounded-xl bg-ugc-pink hover:bg-ugc-berry text-white font-bold text-xs uppercase tracking-wider border-2 border-black shadow-sticker flex items-center gap-1.5 cursor-pointer transition-transform active:translate-x-0.5 active:translate-y-0.5"
+                    className="px-3.5 py-2 rounded-xl bg-ugc-pink hover:bg-ugc-berry text-white font-bold text-xs uppercase tracking-wider border-2 border-black shadow-sticker flex items-center gap-1.5 cursor-pointer transition-transform active:translate-x-0.5 active:translate-y-0.5"
                   >
                     <Camera className="w-3.5 h-3.5" />
-                    <span>Ver Fotos y Videos</span>
+                    <span>Ver Videos</span>
                   </button>
 
                   <button
                     onClick={onOpenQuote}
-                    className="px-3.5 py-1.5 rounded-xl bg-ugc-yellow hover:bg-yellow-300 text-slate-900 font-bold text-xs uppercase tracking-wider border-2 border-black shadow-sticker flex items-center gap-1 cursor-pointer transition-transform active:translate-x-0.5 active:translate-y-0.5"
+                    className="px-3.5 py-2 rounded-xl bg-ugc-yellow hover:bg-yellow-300 text-slate-900 font-bold text-xs uppercase tracking-wider border-2 border-black shadow-sticker flex items-center gap-1 cursor-pointer transition-transform active:translate-x-0.5 active:translate-y-0.5"
                   >
                     <span>Cotizar Ahora</span>
                     <ArrowRight className="w-3 h-3" />
