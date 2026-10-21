@@ -60,6 +60,34 @@ const SAMPLE_PROJECTS: VideoProject[] = [
     tags: ['Gancho Viral', 'Venta Directa', 'Reels & TikTok'],
     videoSrc: '/3.mp4',
   },
+  {
+    id: 'vid-4',
+    title: 'Vlog de Experiencia & Aventura en Ruta',
+    brand: 'Sofía Cruz · UGC',
+    category: 'Estilo de Vida',
+    views: '28.4K',
+    likes: '2.6K',
+    ctr: '6.2%',
+    gradient: 'from-amber-200 via-rose-200 to-ugc-pink',
+    hook: '"Hicimos una parada en el camino para probar el mejor chocolate caliente con esta vista..."',
+    aspectRatio: '9:16',
+    tags: ['Vlog de Viaje', 'Experiencia Real', 'Storytelling'],
+    videoSrc: '/4.mp4',
+  },
+  {
+    id: 'vid-5',
+    title: 'Ruta Gastronómica & Recomendación de Lugares',
+    brand: 'Sofía Cruz · UGC',
+    category: 'Testimonios',
+    views: '34.1K',
+    likes: '3.1K',
+    ctr: '7.5%',
+    gradient: 'from-sky-200 via-ugc-yellow to-emerald-200',
+    hook: '"Un plan perfecto de fin de semana en moto con comida rica y vista a la montaña"',
+    aspectRatio: '9:16',
+    tags: ['Plan Gastronómico', 'Reseña de Lugares', 'Recomendación'],
+    videoSrc: '/5.mp4',
+  },
 ];
 
 export const UGCVideoGallery: React.FC = () => {
@@ -69,6 +97,8 @@ export const UGCVideoGallery: React.FC = () => {
     'vid-1': true,
     'vid-2': true,
     'vid-3': true,
+    'vid-4': true,
+    'vid-5': true,
   });
   const [progressMap, setProgressMap] = useState<Record<string, number>>({});
   const [videoErrors, setVideoErrors] = useState<Record<string, boolean>>({});
