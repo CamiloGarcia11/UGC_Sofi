@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
 import { 
-  Target, 
-  Clock,
   ShieldCheck, 
   CheckCircle,
   Calendar,
   Layers,
-  Award,
   Maximize2,
   X,
-  MessageCircle
+  MessageCircle,
+  Sparkles
 } from 'lucide-react';
+import { InstagramIcon, TikTokIcon } from '../../common/BrandIcons';
 import { motion, AnimatePresence } from 'framer-motion';
 import sofiaPresentationImg from '../../../assets/sofia-cm-presentation.png';
 
@@ -19,18 +18,6 @@ interface CMHeroProps {
   onExploreMethodology: () => void;
   onBookAudit: () => void;
 }
-
-const CM_PROFILE_ROWS = [
-  { label: "INDUSTRIAS", value: "Tiendas Online, Marcas de Moda, Joyería, Belleza y Negocios" },
-  { label: "CÓMO TRABAJAMOS", value: "Cercano, elegante y pensado para conseguir clientes y ventas reales" },
-  { label: "QUÉ SE PUBLICA", value: "Carruseles informativos, videos cortos (Reels) y plan mensual ordenado" },
-  { label: "IDIOMAS", value: "Español (Nativo) · Inglés (Fluido para atender clientes internacionales)" },
-  { label: "PLANES DISPONIBLES", value: "Gestión completa de redes mes a mes, revisión de cuenta y asesorías 1 a 1" },
-  { label: "DISPONIBILIDAD", value: "Trabajo 100% online · Atención exclusiva a máximo 5 marcas por mes" },
-  { label: "PÚBLICO OBJETIVO", value: "Seguidores leales y personas interesadas listas para comprarte" },
-  { label: "REDES SOCIALES", value: "Instagram, TikTok, LinkedIn y anuncios pagos en Meta" },
-  { label: "LO QUE NOS DIFERENCIA", value: "Respondemos tus mensajes en menos de 1 hora y entregamos reportes claros" },
-];
 
 export const CMHero: React.FC<CMHeroProps> = ({ 
   onExploreServices, 
@@ -162,139 +149,140 @@ export const CMHero: React.FC<CMHeroProps> = ({
             </div>
           </div>
 
-          {/* RIGHT: STRATEGIC PROPOSITION, KPIS & FICHA DE ESTRATEGA */}
-          <div className="lg:col-span-7 space-y-4 text-left">
+          {/* RIGHT: SHORT & DIRECT PRESENTATION CARD (ESTILO UGC) */}
+          <div className="lg:col-span-7 flex flex-col justify-center">
             
-            {/* Header Proposition */}
-            <div className="space-y-2">
-              <div className="inline-flex items-center gap-2 px-3 py-0.5 rounded-full bg-cm-burgundy text-white text-[10px] font-bold shadow-sm">
-                <span className="w-1.5 h-1.5 rounded-full bg-cm-yellow animate-pulse" />
-                <span className="uppercase tracking-wider">Estrategia y Crecimiento de Redes Sociales</span>
-              </div>
-
-              <h2 className="font-editorialSerif text-2xl sm:text-3xl lg:text-4xl font-extrabold text-cm-chocolate tracking-tight leading-[1.15]">
-                Hacemos que tus redes se vean profesionales y <span className="text-cm-burgundy italic">conecten con tu público</span>
-              </h2>
-            </div>
-
-            {/* Pilares de Compromiso y Calidad de Servicio */}
-            <div className="grid grid-cols-3 gap-2">
-              <div className="p-2.5 rounded-xl bg-white border-2 border-cm-chocolate shadow-sticker-burgundy">
-                <div className="flex items-center gap-1 text-cm-burgundy font-editorialSerif font-bold text-base sm:text-lg">
-                  <Target className="w-3.5 h-3.5 shrink-0" />
-                  <span>100%</span>
+            <div className="relative w-full bg-white rounded-3xl border-3 border-cm-chocolate shadow-[8px_8px_0px_#3C2722] p-5 sm:p-6 transition-all">
+              
+              {/* Top Washi Tape Sticker */}
+              <div className="absolute -top-3.5 left-8 z-20">
+                <div className="px-3.5 py-1 bg-cm-yellow border-2 border-cm-chocolate text-[10px] font-mono uppercase tracking-wider text-cm-chocolate shadow-sm font-bold transform -rotate-1 rounded-md flex items-center gap-1.5">
+                  <Sparkles className="w-3 h-3 text-cm-burgundy" />
+                  <span>HOLA, SOY SOFÍA ✨</span>
                 </div>
-                <span className="text-[10px] text-slate-700 block font-bold leading-tight mt-0.5">A tu Medida</span>
               </div>
 
-              <div className="p-2.5 rounded-xl bg-white border-2 border-cm-chocolate shadow-sticker-burgundy">
-                <div className="flex items-center gap-1 text-cm-chocolate font-editorialSerif font-bold text-base sm:text-lg">
-                  <Clock className="w-3.5 h-3.5 shrink-0 text-cm-burgundy" />
-                  <span>&lt; 1 Hora</span>
-                </div>
-                <span className="text-[10px] text-slate-700 block font-bold leading-tight mt-0.5">Atención Rápida</span>
-              </div>
-
-              <div className="p-2.5 rounded-xl bg-white border-2 border-cm-chocolate shadow-sticker-burgundy">
-                <div className="flex items-center gap-1 text-emerald-700 font-editorialSerif font-bold text-base sm:text-lg">
-                  <Calendar className="w-3.5 h-3.5 shrink-0" />
-                  <span>30 Días</span>
-                </div>
-                <span className="text-[10px] text-slate-700 block font-bold leading-tight mt-0.5">Sin Improvisar</span>
-              </div>
-            </div>
-
-            {/* Ficha de Estratega Card */}
-            <div className="relative w-full bg-white rounded-2xl border-2 border-cm-chocolate shadow-[6px_6px_0px_#3C2722] p-4 sm:p-5 transition-all">
-              <div className="flex items-center justify-between pb-2.5 border-b-2 border-cm-chocolate/15">
+              {/* Header & Tagline */}
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3.5 border-b-2 border-cm-chocolate/10 pt-1">
                 <div>
-                  <h3 className="font-editorialSerif text-lg sm:text-xl text-cm-chocolate tracking-tight leading-none font-bold">
-                    PERFIL DE <span className="text-cm-burgundy">ESTRATEGA & CM</span>
+                  <h3 className="font-editorialSerif font-bold text-2xl sm:text-3xl text-cm-chocolate tracking-tight leading-tight">
+                    ¡Hola! Soy <span className="text-cm-burgundy">Sofía Cruz</span> 👋
                   </h3>
+                  <p className="text-xs sm:text-[13px] text-cm-burgundy font-bold mt-0.5">
+                    Community Manager & Estratega de Redes Sociales
+                  </p>
                 </div>
 
-                <div className="hidden sm:flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-cm-blue border border-cm-chocolate text-[10px] font-mono font-bold text-cm-chocolate">
-                  <Award className="w-3 h-3 text-cm-burgundy" />
-                  <span>MÁX. 5 MARCAS</span>
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-cm-blue border-2 border-cm-chocolate text-[10px] font-mono font-bold text-cm-chocolate w-fit">
+                  <span className="w-2 h-2 rounded-full bg-emerald-600 animate-pulse" />
+                  <span>AGENDA ABIERTA 2026</span>
                 </div>
               </div>
 
-              <div className="divide-y divide-cm-chocolate/10 text-xs mt-1">
-                {CM_PROFILE_ROWS.map((row, index) => (
-                  <div 
-                    key={index}
-                    className="grid grid-cols-1 sm:grid-cols-12 gap-1 sm:gap-2 py-1.5 sm:py-2 items-baseline hover:bg-cm-cream/40 px-1.5 rounded transition-colors"
-                  >
-                    <div className="sm:col-span-4 flex items-center gap-1">
-                      <span className="text-cm-burgundy text-[10px]">◆</span>
-                      <span className="font-editorialSerif font-bold text-[11px] text-cm-chocolate tracking-wide uppercase">
-                        {row.label}
-                      </span>
-                    </div>
+              {/* Short & Direct Intro (Directo, breve y sin rodeos) */}
+              <div className="py-3.5 space-y-3 text-slate-700 text-xs sm:text-sm leading-relaxed font-medium">
+                <p>
+                  Ayudo a <strong>marcas, negocios y tiendas online</strong> a transformar sus redes en un canal profesional de ventas y confianza. Gestiono tus publicaciones, diseño contenidos atractivos y atiendo a tu comunidad para que dejes de improvisar.
+                </p>
 
-                    <div className="sm:col-span-8">
-                      <span className="font-sans text-[11px] sm:text-xs text-slate-800 font-medium">
-                        {row.value}
-                      </span>
+                {/* 3 Quick Benefit Pills (Visual, directo, fácil de leer en 3 segundos) */}
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 pt-1">
+                  <div className="p-2.5 rounded-2xl bg-[#FAF5EA] border-2 border-cm-chocolate flex items-center gap-2 shadow-xs">
+                    <span className="text-xl">🎯</span>
+                    <div>
+                      <strong className="block text-cm-chocolate text-xs leading-tight font-bold">100% a Medida</strong>
+                      <span className="text-[10px] text-slate-600 font-sans">Para tu marca</span>
                     </div>
                   </div>
-                ))}
+
+                  <div className="p-2.5 rounded-2xl bg-[#FAF5EA] border-2 border-cm-chocolate flex items-center gap-2 shadow-xs">
+                    <span className="text-xl">⏱️</span>
+                    <div>
+                      <strong className="block text-cm-chocolate text-xs leading-tight font-bold">&lt; 1 Hora</strong>
+                      <span className="text-[10px] text-slate-600 font-sans">Atención rápida</span>
+                    </div>
+                  </div>
+
+                  <div className="p-2.5 rounded-2xl bg-[#FAF5EA] border-2 border-cm-chocolate flex items-center gap-2 shadow-xs">
+                    <span className="text-xl">🗓️</span>
+                    <div>
+                      <strong className="block text-cm-chocolate text-xs leading-tight font-bold">30 Días</strong>
+                      <span className="text-[10px] text-slate-600 font-sans">Sin improvisar</span>
+                    </div>
+                  </div>
+                </div>
               </div>
 
-              <div className="mt-3 pt-2.5 border-t-2 border-dashed border-cm-chocolate/15 flex flex-wrap items-center justify-between gap-2 text-xs text-slate-600">
-                <div className="flex items-center gap-1 text-[10px] sm:text-[11px] text-slate-700 font-medium">
-                  <ShieldCheck className="w-3 h-3 text-emerald-700" />
-                  <span>Acuerdos de confidencialidad y no divulgación (NDA)</span>
+              {/* Bottom CTAs & Rights Note */}
+              <div className="pt-3 border-t-2 border-cm-chocolate/10 flex flex-wrap items-center justify-between gap-3">
+                <div className="flex items-center gap-1.5 text-[11px] text-emerald-800 font-semibold font-sans">
+                  <ShieldCheck className="w-3.5 h-3.5 text-emerald-700 shrink-0" />
+                  <span>Acuerdos de confidencialidad (NDA) y reporte mensual</span>
                 </div>
 
-                <div className="flex items-center gap-1">
-                  <span className="font-editorialSerif font-bold text-cm-burgundy text-xs">Sofía</span>
-                  <span className="font-tanDisplay text-cm-chocolate text-xs -ml-0.5">Cruz</span>
-                  <span className="text-[9px] font-mono text-slate-400 pl-1 uppercase">
-                    · Verified Strategist
-                  </span>
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={onExploreMethodology}
+                    className="hidden sm:inline-flex px-3 py-2 rounded-xl hover:bg-[#FAF5EA] text-cm-chocolate text-xs font-bold items-center gap-1 transition-colors cursor-pointer border border-cm-chocolate/20"
+                  >
+                    <span>Metodología</span>
+                  </button>
+
+                  <button
+                    onClick={onExploreServices}
+                    className="px-3.5 py-2 rounded-xl bg-cm-blue hover:bg-sky-300 text-cm-chocolate font-bold text-xs uppercase tracking-wider border-2 border-cm-chocolate shadow-sticker-burgundy flex items-center gap-1.5 cursor-pointer transition-transform active:translate-x-0.5 active:translate-y-0.5"
+                  >
+                    <Layers className="w-3.5 h-3.5 text-cm-burgundy" />
+                    <span>Ver Servicios</span>
+                  </button>
+
+                  <button
+                    onClick={onBookAudit}
+                    className="px-3.5 py-2 rounded-xl bg-cm-burgundy hover:bg-[#6e1227] text-white font-bold text-xs uppercase tracking-wider border-2 border-cm-chocolate shadow-sticker-burgundy flex items-center gap-1.5 cursor-pointer transition-transform active:translate-x-0.5 active:translate-y-0.5"
+                  >
+                    <Calendar className="w-3.5 h-3.5 text-cm-yellow" />
+                    <span>Auditoría Gratis</span>
+                  </button>
                 </div>
               </div>
-            </div>
 
-            {/* Action CTAs */}
-            <div className="flex flex-wrap items-center gap-2.5 pt-1">
-              <button
-                onClick={onBookAudit}
-                className="px-4 py-2.5 rounded-xl bg-cm-burgundy hover:bg-[#6e1227] text-white font-bold text-xs uppercase tracking-wider border-2 border-cm-chocolate shadow-editorial flex items-center gap-1.5 cursor-pointer transition-transform active:translate-x-0.5 active:translate-y-0.5"
-              >
-                <Calendar className="w-3.5 h-3.5" />
-                <span>Revisar mi Cuenta Gratis</span>
-              </button>
-
-              <button
-                onClick={onExploreServices}
-                className="px-3.5 py-2.5 rounded-xl bg-cm-blue hover:bg-sky-300 text-cm-chocolate font-bold text-xs uppercase tracking-wider border-2 border-cm-chocolate shadow-editorial flex items-center gap-1.5 cursor-pointer transition-transform active:translate-x-0.5 active:translate-y-0.5"
-              >
-                <Layers className="w-3.5 h-3.5 text-cm-burgundy" />
-                <span>Ver Servicios</span>
-              </button>
-
-              <button
-                onClick={onExploreMethodology}
-                className="px-3 py-2 rounded-xl hover:bg-white text-cm-chocolate text-xs font-bold flex items-center gap-1.5 transition-colors cursor-pointer border border-cm-chocolate/20"
-              >
-                <Award className="w-3.5 h-3.5 text-cm-burgundy" />
-                <span>Cómo Trabajamos</span>
-              </button>
-            </div>
-
-            {/* Guarantee Note */}
-            <div className="flex items-center gap-2 text-[11px] text-slate-600 font-medium pt-0.5">
-              <span className="flex items-center gap-1 text-emerald-800 font-bold">
-                <CheckCircle className="w-3.5 h-3.5 text-emerald-700" /> Atención dedicada a tu negocio
-              </span>
-              <span>•</span>
-              <span>Total privacidad y confidencialidad</span>
             </div>
 
           </div>
 
+        </div>
+
+        {/* 3. REDES SOCIALES OFICIALES & CANALES DIRECTOS DE SOFÍA */}
+        <div className="flex flex-wrap items-center justify-center gap-2.5 pt-4">
+          <a
+            href="https://wa.me/573023399168?text=Hola%20Sof%C3%ADa,%20me%20gustar%C3%ADa%20cotizar%20servicios%20de%20Community%20Manager"
+            target="_blank"
+            rel="noreferrer"
+            className="px-3.5 py-1.5 rounded-full bg-[#25D366]/20 border-2 border-cm-chocolate text-slate-900 font-bold text-xs shadow-sm hover:bg-[#25D366]/30 transition-all flex items-center gap-1.5 group"
+          >
+            <MessageCircle className="w-3.5 h-3.5 text-emerald-700 group-hover:scale-110 transition-transform" />
+            <span>WhatsApp: 3023399168</span>
+          </a>
+
+          <a
+            href="https://www.instagram.com/sofiacruz0?rpxt=eGo2ODZtbXU2dWM0"
+            target="_blank"
+            rel="noreferrer"
+            className="px-3.5 py-1.5 rounded-full bg-cm-blue/30 border-2 border-cm-chocolate text-slate-900 font-bold text-xs shadow-sm hover:bg-cm-blue/50 transition-all flex items-center gap-1.5 group"
+          >
+            <InstagramIcon className="w-3.5 h-3.5 text-cm-burgundy group-hover:scale-110 transition-transform" />
+            <span>Instagram: @sofiacruz0</span>
+          </a>
+
+          <a
+            href="https://www.tiktok.com/@sofiacruzve?_r=1&_t=ZS-9AisJbpLF0n"
+            target="_blank"
+            rel="noreferrer"
+            className="px-3.5 py-1.5 rounded-full bg-slate-900 text-white border-2 border-cm-chocolate font-bold text-xs shadow-sm hover:bg-slate-800 transition-all flex items-center gap-1.5 group"
+          >
+            <TikTokIcon className="w-3.5 h-3.5 text-cm-yellow group-hover:scale-110 transition-transform" />
+            <span>TikTok: @sofiacruzve</span>
+          </a>
         </div>
 
       </div>
