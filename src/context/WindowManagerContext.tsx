@@ -8,7 +8,7 @@ const getInitialWindows = (): Record<WindowId, WindowState> => ({
     id: 'notepad',
     title: 'Sobre_mi.txt - Bloc de notas',
     subtitle: 'Texto sin formato',
-    isOpen: !isMobileDevice,
+    isOpen: false,
     isMinimized: false,
     isMaximized: false,
     zIndex: 12,
@@ -21,10 +21,10 @@ const getInitialWindows = (): Record<WindowId, WindowState> => ({
     id: 'ugc',
     title: 'UGC Creator Studio - Internet Explorer',
     subtitle: 'Creatividad, Reels & TikToks 9:16',
-    isOpen: isMobileDevice,
+    isOpen: false,
     isMinimized: false,
     isMaximized: isMobileDevice,
-    zIndex: isMobileDevice ? 15 : 10,
+    zIndex: 10,
     url: 'http://www.mi-portafolio.xp/ugc',
     icon: '🎬',
     defaultPosition: { x: 60, y: 35 },
@@ -36,7 +36,7 @@ const getInitialWindows = (): Record<WindowId, WindowState> => ({
     subtitle: 'Estrategia, Métricas & Marcas',
     isOpen: false,
     isMinimized: false,
-    isMaximized: false,
+    isMaximized: isMobileDevice,
     zIndex: 9,
     url: 'http://www.mi-portafolio.xp/community-manager',
     icon: '📊',
@@ -49,7 +49,7 @@ const getInitialWindows = (): Record<WindowId, WindowState> => ({
     subtitle: 'Conexión, WhatsApp & Media Kit',
     isOpen: false,
     isMinimized: false,
-    isMaximized: false,
+    isMaximized: isMobileDevice,
     zIndex: 11,
     url: 'http://www.mi-portafolio.xp/contacto',
     icon: '📁',
@@ -62,7 +62,7 @@ const WindowManagerContext = createContext<WindowManagerContextType | null>(null
 
 export const WindowManagerProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [windows, setWindows] = useState<Record<WindowId, WindowState>>(getInitialWindows);
-  const [activeWindowId, setActiveWindowId] = useState<WindowId | null>(isMobileDevice ? 'ugc' : 'notepad');
+  const [activeWindowId, setActiveWindowId] = useState<WindowId | null>(null);
   const [isSplitScreen, setIsSplitScreen] = useState<boolean>(false);
   const [isStartMenuOpen, setIsStartMenuOpen] = useState<boolean>(false);
 

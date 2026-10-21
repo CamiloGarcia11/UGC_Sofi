@@ -5,9 +5,7 @@ import { useWindowManager } from '../../context/WindowManagerContext';
 
 export const ClippyAssistant: React.FC = () => {
   const { openWindow } = useWindowManager();
-  const [isVisible, setIsVisible] = useState<boolean>(() => {
-    return typeof window !== 'undefined' ? window.innerWidth >= 768 : true;
-  });
+  const [isVisible, setIsVisible] = useState<boolean>(false);
   const [isWinking, setIsWinking] = useState<boolean>(false);
 
   const handleClippyClick = () => {
