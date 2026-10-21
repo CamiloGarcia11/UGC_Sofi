@@ -87,7 +87,7 @@ export const DesktopIcons: React.FC = () => {
 
   return (
     <div 
-      className="absolute top-28 left-6 md:left-10 z-10 flex flex-col gap-6 select-none"
+      className="absolute top-32 sm:top-28 left-6 md:left-10 z-10 flex flex-col gap-7 sm:gap-6 select-none"
       onClick={() => setSelectedId(null)}
     >
       {icons.map((icon) => {
@@ -118,7 +118,7 @@ export const DesktopIcons: React.FC = () => {
 
             {/* Label with Windows XP drop shadow */}
             <span 
-              className={`mt-1.5 text-[11px] font-sans font-medium leading-tight px-1 py-0.5 rounded ${
+              className={`mt-1.5 mb-1 text-[11px] font-sans font-medium leading-tight px-1 py-0.5 rounded ${
                 isSelected 
                   ? 'bg-[#0B61FF] text-white' 
                   : 'text-white drop-shadow-[1px_1px_1px_#000000]'
@@ -133,7 +133,7 @@ export const DesktopIcons: React.FC = () => {
                 e.stopPropagation();
                 openWindow(icon.id);
               }}
-              className="mt-1 sm:hidden text-[9px] px-2 py-0.5 bg-yellow-300 text-black font-pixel font-bold rounded shadow border border-black"
+              className="mt-2.5 sm:hidden text-[9px] px-2.5 py-1 bg-yellow-300 hover:bg-yellow-400 text-black font-pixel font-bold rounded shadow-[1px_1px_0px_#000] border border-black active:translate-x-0.5 active:translate-y-0.5 transition-all"
             >
               Abrir
             </button>
