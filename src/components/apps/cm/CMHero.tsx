@@ -58,20 +58,20 @@ export const CMHero: React.FC<CMHeroProps> = ({
         {/* 1. TOP BRAND HEADER: LOGO & TAGS */}
         <div className="flex flex-col items-center justify-center text-center pt-1">
           
-          <div className="inline-flex items-center gap-2 px-3 py-0.5 rounded-full bg-cm-blue/30 border border-cm-blue text-cm-chocolate text-[10px] font-bold tracking-[0.25em] uppercase mb-1">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cm-blue/30 border border-cm-blue text-cm-chocolate text-[10px] font-bold tracking-[0.25em] uppercase mb-1.5">
             <span>GESTIÓN DE REDES SOCIALES · COMMUNITY MANAGER</span>
           </div>
 
-          <div className="relative inline-block my-0.5">
+          <div className="flex items-baseline justify-center gap-2.5 sm:gap-4 my-1 sm:my-2">
             <h1 className="font-editorialSerif font-bold text-4xl sm:text-6xl md:text-7xl text-cm-burgundy tracking-tight drop-shadow-[2px_2px_0px_#B4D9F4] leading-none select-none">
               Sofía
             </h1>
-            <span className="font-tanDisplay text-3xl sm:text-5xl md:text-6xl text-cm-chocolate sm:text-[#B4D9F4] absolute -bottom-2.5 sm:-bottom-3.5 -right-5 sm:-right-8 transform -rotate-2 select-none">
+            <span className="font-tanDisplay italic font-normal text-3xl sm:text-5xl md:text-6xl text-cm-chocolate tracking-normal select-none inline-block">
               Cruz
             </span>
           </div>
 
-          <p className="font-sans text-xs sm:text-sm text-slate-700 max-w-md mt-2.5 font-medium leading-relaxed">
+          <p className="font-sans text-xs sm:text-sm text-slate-700 max-w-md mt-2 font-medium leading-relaxed">
             Manejo integral de tus redes, creación de contenido que conecta y estrategias sencillas para que consigas más clientes todos los días.
           </p>
 
