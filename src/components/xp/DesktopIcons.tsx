@@ -46,26 +46,6 @@ export const DesktopIcons: React.FC = () => {
       ),
     },
     {
-      id: 'notepad' as WindowId,
-      name: 'Sobre_mi.txt',
-      label: 'Sobre_mi.txt',
-      type: 'Documento',
-      renderIcon: () => (
-        <div className="relative w-12 h-12 flex items-center justify-center">
-          {/* Classic Windows XP Notepad Icon */}
-          <svg viewBox="0 0 48 48" className="w-11 h-11 drop-shadow-md">
-            <path d="M10 6 L32 6 L40 14 L40 42 L10 42 Z" fill="#ffffff" stroke="#374151" strokeWidth="1.5" />
-            <path d="M32 6 L32 14 L40 14 Z" fill="#d1d5db" stroke="#374151" strokeWidth="1" />
-            {/* Notepad lines */}
-            <line x1="15" y1="18" x2="33" y2="18" stroke="#3b82f6" strokeWidth="1.5" />
-            <line x1="15" y1="24" x2="35" y2="24" stroke="#9ca3af" strokeWidth="1.2" />
-            <line x1="15" y1="30" x2="35" y2="30" stroke="#9ca3af" strokeWidth="1.2" />
-            <line x1="15" y1="36" x2="28" y2="36" stroke="#9ca3af" strokeWidth="1.2" />
-          </svg>
-        </div>
-      ),
-    },
-    {
       id: 'contact' as WindowId,
       name: 'Contacto_Directo.exe',
       label: 'Contacto Directo.exe',

@@ -73,14 +73,6 @@ export const ClippyAssistant: React.FC = () => {
             <span className="w-2 h-2 rounded-full bg-blue-600" />
             <span>Abrir CM Strategy Pro (Métricas & Clientes)</span>
           </button>
-
-          <button
-            onClick={() => openWindow('notepad')}
-            className="w-full text-left px-2.5 py-1.5 rounded bg-white hover:bg-[#d8e6ff] border border-slate-300 text-xs font-semibold text-[#003399] flex items-center gap-2 transition-colors cursor-pointer"
-          >
-            <span className="w-2 h-2 rounded-full bg-emerald-500" />
-            <span>Leer Sobre_mi.txt (Bloc de notas)</span>
-          </button>
         </div>
 
         {/* Speech Bubble Arrow */}

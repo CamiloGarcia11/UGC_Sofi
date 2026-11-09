@@ -100,8 +100,8 @@ export const XPWindowFrame: React.FC<XPWindowFrameProps> = ({ id, children }) =>
       targetWidth = '460px';
       targetHeight = '460px';
     } else if (id === 'contact') {
-      targetWidth = '560px';
-      targetHeight = '620px';
+      targetWidth = 'min(760px, 92vw)';
+      targetHeight = 'min(740px, 86vh)';
     } else {
       targetWidth = 'min(1150px, 88vw)';
       targetHeight = 'min(780px, 84vh)';

@@ -1,7 +1,7 @@
-import React from 'react';
-import { Sparkles, Star } from 'lucide-react';
+import React, { useRef, useState, useEffect } from 'react';
+import { Star, ChevronLeft, ChevronRight, Sparkles } from 'lucide-react';
 
-interface BrandPlaceholder {
+interface BrandItem {
   id: string;
   name: string;
   category: string;
@@ -10,7 +10,7 @@ interface BrandPlaceholder {
   imgSrc?: string;
 }
 
-const PLACEHOLDER_BRANDS: BrandPlaceholder[] = [
+const BRANDS_LIST: BrandItem[] = [
   { id: 'b1', name: 'Belleza & Glow', category: 'Cosméticos', bgColor: 'bg-ugc-pink/20', textColor: 'text-ugc-berry' },
   { id: 'b2', name: 'Moda Urbana', category: 'Boutique', bgColor: 'bg-ugc-yellow/30', textColor: 'text-amber-900' },
   { id: 'b3', name: 'Skincare Natural', category: 'Cuidado Facial', bgColor: 'bg-ugc-blue/30', textColor: 'text-sky-900' },
@@ -20,63 +20,136 @@ const PLACEHOLDER_BRANDS: BrandPlaceholder[] = [
   { id: 'b7', name: 'Lifestyle & Tech', category: 'Tecnología', bgColor: 'bg-slate-100', textColor: 'text-slate-900' },
   { id: 'b8', name: 'Calzado & Bolsos', category: 'Accesorios', bgColor: 'bg-pink-100', textColor: 'text-pink-900' },
   { id: 'b9', name: 'Marcas Aliadas', category: 'Colaboraciones', bgColor: 'bg-yellow-100', textColor: 'text-amber-950' },
+  { id: 'b10', name: 'Moda Juvenil', category: 'Outfit & Ropa', bgColor: 'bg-rose-100', textColor: 'text-rose-900' },
+  { id: 'b11', name: 'Estética & Spa', category: 'Cuidado Personal', bgColor: 'bg-teal-100', textColor: 'text-teal-900' },
+  { id: 'b12', name: 'Boutique Chic', category: 'Moda Femenina', bgColor: 'bg-indigo-100', textColor: 'text-indigo-900' },
 ];
 
 export const UGCBrands: React.FC = () => {
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const [isPaused, setIsPaused] = useState(false);
+
+  // Auto-scroll loop para movimiento continuo y dinámico
+  useEffect(() => {
+    const container = scrollContainerRef.current;
+    if (!container) return;
+
+    let animationFrameId: number;
+    const scrollSpeed = 0.75; // Velocidad suave
+
+    const step = () => {
+      if (!isPaused && container) {
+        container.scrollLeft += scrollSpeed;
+        // Si llega al final del contenido original, volver suavemente al inicio
+        if (container.scrollLeft >= container.scrollWidth / 2) {
+          container.scrollLeft = 0;
+        }
+      }
+      animationFrameId = requestAnimationFrame(step);
+    };
+
+    animationFrameId = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(animationFrameId);
+  }, [isPaused]);
+
+  const scrollManual = (direction: 'left' | 'right') => {
+    if (scrollContainerRef.current) {
+      const offset = direction === 'left' ? -240 : 240;
+      scrollContainerRef.current.scrollBy({ left: offset, behavior: 'smooth' });
+    }
+  };
+
+  // Duplicamos la lista para dar efecto de carrusel continuo infinito
+  const displayBrands = [...BRANDS_LIST, ...BRANDS_LIST];
+
   return (
-    <section id="ugc-brands" className="py-10 px-4 sm:px-6 md:px-8 max-w-5xl mx-auto">
+    <section id="ugc-brands" className="py-8 sm:py-10 px-4 sm:px-6 md:px-8 max-w-6xl mx-auto overflow-hidden">
       {/* Encabezado */}
-      <div className="text-center mb-8">
-        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-ugc-yellow/40 border border-black text-slate-900 text-[10px] font-mono font-bold tracking-[0.2em] uppercase mb-2 shadow-xs">
+      <div className="text-center mb-6 sm:mb-8">
+        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-ugc-yellow/40 border border-black text-slate-900 text-[10px] font-mono font-bold tracking-[0.2em] uppercase mb-1.5 shadow-xs">
           <Star className="w-3 h-3 text-ugc-pink fill-ugc-pink" />
           <span>PORTAFOLIO COMERCIAL</span>
         </div>
-        <h2 className="font-chunky text-3xl sm:text-5xl text-slate-900 tracking-tight">
+        <h2 className="font-chunky text-3xl sm:text-4xl md:text-5xl text-slate-900 tracking-tight">
           Marcas <span className="text-ugc-pink drop-shadow-[2px_2px_0px_#B4D9F4]">con las que he trabajado</span>
         </h2>
-        <p className="text-xs sm:text-sm text-slate-600 font-medium max-w-md mx-auto mt-2">
-          Colaboraciones, creación de contenido publicitario y reseñas auténticas para marcas de moda, belleza y estilo de vida.
+        <p className="text-xs sm:text-sm text-slate-600 font-medium max-w-md mx-auto mt-1.5">
+          Colaboraciones comerciales, reseñas y contenido publicitario para marcas destacadas.
         </p>
       </div>
 
-      {/* Grid Circular de Marcas (Inspirado en el Canva, limpio y listo para fotos) */}
-      <div className="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-5 justify-items-center">
-        {PLACEHOLDER_BRANDS.map((brand) => (
-          <div
-            key={brand.id}
-            className="flex flex-col items-center group cursor-pointer"
-            title={`${brand.name} · ${brand.category}`}
-          >
-            {/* Círculo estilo sticker con borde retro */}
-            <div className={`w-20 h-20 sm:w-24 sm:h-24 rounded-full border-3 border-black ${brand.bgColor} flex flex-col items-center justify-center p-2 text-center shadow-[4px_4px_0px_#000000] group-hover:-translate-y-1 group-hover:shadow-[6px_6px_0px_#000000] transition-all select-none overflow-hidden relative`}>
-              {brand.imgSrc ? (
-                <img 
-                  src={brand.imgSrc} 
-                  alt={brand.name} 
-                  className="w-full h-full object-contain rounded-full" 
-                />
-              ) : (
-                <>
-                  <Sparkles className="w-3.5 h-3.5 text-ugc-pink mb-0.5 opacity-80" />
-                  <span className={`font-chunky text-[10px] sm:text-[11px] leading-tight ${brand.textColor}`}>
-                    {brand.name}
-                  </span>
-                </>
-              )}
-            </div>
+      {/* Carrusel Dinámico con Controles */}
+      <div 
+        className="relative w-full"
+        onMouseEnter={() => setIsPaused(true)}
+        onMouseLeave={() => setIsPaused(false)}
+        onTouchStart={() => setIsPaused(true)}
+        onTouchEnd={() => setIsPaused(false)}
+      >
+        {/* Botón Izquierdo */}
+        <button
+          onClick={() => scrollManual('left')}
+          className="absolute -left-2 sm:left-1 top-1/2 -translate-y-1/2 z-20 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white hover:bg-ugc-yellow text-slate-900 border-2 border-black shadow-[2px_2px_0px_#000] flex items-center justify-center transition-all active:scale-95 cursor-pointer"
+          aria-label="Anterior"
+        >
+          <ChevronLeft className="w-5 h-5" />
+        </button>
 
-            {/* Categoría pequeña debajo */}
-            <span className="font-mono text-[9px] font-bold text-slate-500 mt-1.5 uppercase tracking-wider text-center">
-              {brand.category}
-            </span>
-          </div>
-        ))}
+        {/* Botón Derecho */}
+        <button
+          onClick={() => scrollManual('right')}
+          className="absolute -right-2 sm:right-1 top-1/2 -translate-y-1/2 z-20 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white hover:bg-ugc-yellow text-slate-900 border-2 border-black shadow-[2px_2px_0px_#000] flex items-center justify-center transition-all active:scale-95 cursor-pointer"
+          aria-label="Siguiente"
+        >
+          <ChevronRight className="w-5 h-5" />
+        </button>
+
+        {/* Degradados laterales para desvanecimiento elegante */}
+        <div className="absolute left-0 inset-y-0 w-8 sm:w-16 bg-gradient-to-r from-[#FBF8EF] to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 inset-y-0 w-8 sm:w-16 bg-gradient-to-l from-[#FBF8EF] to-transparent z-10 pointer-events-none" />
+
+        {/* Track Deslizable del Carrusel */}
+        <div
+          ref={scrollContainerRef}
+          className="flex items-center gap-4 sm:gap-6 overflow-x-auto no-scrollbar py-4 px-8 cursor-grab active:cursor-grabbing select-none"
+          style={{ scrollBehavior: 'auto' }}
+        >
+          {displayBrands.map((brand, index) => (
+            <div
+              key={`${brand.id}-${index}`}
+              className="flex flex-col items-center shrink-0 group transition-transform hover:-translate-y-1.5"
+            >
+              {/* Círculo estilo sticker */}
+              <div className={`w-20 h-20 sm:w-24 sm:h-24 rounded-full border-3 border-black ${brand.bgColor} flex flex-col items-center justify-center p-2 text-center shadow-[4px_4px_0px_#000000] group-hover:shadow-[6px_6px_0px_#000000] transition-all select-none overflow-hidden relative`}>
+                {brand.imgSrc ? (
+                  <img 
+                    src={brand.imgSrc} 
+                    alt={brand.name} 
+                    className="w-full h-full object-contain rounded-full" 
+                  />
+                ) : (
+                  <>
+                    <Sparkles className="w-3.5 h-3.5 text-ugc-pink mb-0.5 opacity-80" />
+                    <span className={`font-chunky text-[10px] sm:text-[11px] leading-tight ${brand.textColor}`}>
+                      {brand.name}
+                    </span>
+                  </>
+                )}
+              </div>
+
+              {/* Categoría pequeña debajo */}
+              <span className="font-mono text-[9px] font-bold text-slate-500 mt-1.5 uppercase tracking-wider text-center max-w-[100px] truncate">
+                {brand.category}
+              </span>
+            </div>
+          ))}
+        </div>
       </div>
 
-      {/* Nota sutil al pie */}
-      <div className="text-center mt-6">
-        <span className="inline-block text-[11px] font-mono text-slate-400 font-medium bg-white/70 px-4 py-1 rounded-full border border-slate-200">
-          ✦ Espacios listos para nuevas marcas y colaboraciones 2026 ✦
+      {/* Indicador / Nota sutil */}
+      <div className="text-center mt-3 sm:mt-4">
+        <span className="inline-block text-[10px] sm:text-[11px] font-mono text-slate-500 font-medium bg-white/70 px-3.5 py-1 rounded-full border border-slate-200">
+          ✦ Desliza o toca para pausar · Espacios listos para marcas 2026 ✦
         </span>
       </div>
     </section>

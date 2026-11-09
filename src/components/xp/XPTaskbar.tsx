@@ -5,7 +5,6 @@ import {
   Wifi, 
   Columns, 
   MessageCircle, 
-  FileText, 
   Video, 
   BarChart3, 
   UserCheck, 
@@ -154,23 +153,6 @@ export const XPTaskbar: React.FC = () => {
                 <div>
                   <span className="font-bold text-xs block leading-tight">CM Strategy Pro</span>
                   <span className="text-[10px] text-slate-500 group-hover:text-blue-100 block">Gestión & Métricas</span>
-                </div>
-              </button>
-
-              {/* App: Notepad */}
-              <button
-                onClick={() => {
-                  closeStartMenu();
-                  openWindow('notepad');
-                }}
-                className="w-full p-1.5 rounded hover:bg-[#316ac5] hover:text-white flex items-center gap-2.5 text-left transition-colors cursor-pointer group"
-              >
-                <div className="w-7 h-7 rounded bg-slate-700 text-white flex items-center justify-center shrink-0 shadow-sm">
-                  <FileText className="w-4 h-4" />
-                </div>
-                <div>
-                  <span className="font-bold text-xs block leading-tight">Sobre_mi.txt</span>
-                  <span className="text-[10px] text-slate-500 group-hover:text-blue-100 block">Bloc de notas</span>
                 </div>
               </button>
 
@@ -327,13 +309,6 @@ export const XPTaskbar: React.FC = () => {
               title="Abrir Community Manager Pro"
             >
               <BarChart3 className="w-3.5 h-3.5 text-blue-200" />
-            </button>
-            <button
-              onClick={() => openWindow('notepad')}
-              className="p-1 hover:bg-white/20 rounded cursor-pointer"
-              title="Abrir Sobre_mi.txt"
-            >
-              <FileText className="w-3.5 h-3.5 text-yellow-200" />
             </button>
           </div>
         </div>

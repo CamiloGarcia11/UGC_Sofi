@@ -53,8 +53,8 @@ const getInitialWindows = (): Record<WindowId, WindowState> => ({
     zIndex: 11,
     url: 'http://www.mi-portafolio.xp/contacto',
     icon: '📁',
-    defaultPosition: { x: 200, y: 80 },
-    defaultSize: { width: '560px', height: '600px' },
+    defaultPosition: { x: 120, y: 45 },
+    defaultSize: { width: 'min(760px, 92vw)', height: 'min(740px, 86vh)' },
   },
 });
 

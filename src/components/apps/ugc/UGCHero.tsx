@@ -5,9 +5,7 @@ import {
   X,
   Sparkles,
   Camera,
-  CheckCircle2,
-  MessageCircle,
-  Mail
+  CheckCircle2
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import sofiaPresentationImg from '../../../assets/sofia-presentacion.png';
@@ -181,7 +179,7 @@ const GoldStarSVG: React.FC<{ className?: string }> = ({ className = "w-6 h-6" }
   </svg>
 );
 
-export const UGCHero: React.FC<UGCHeroProps> = ({ onExploreGallery, onOpenQuote, onExploreStats }) => {
+export const UGCHero: React.FC<UGCHeroProps> = ({ onExploreGallery, onOpenQuote }) => {
   const [isPosterZoomed, setIsPosterZoomed] = useState(false);
   const [posterTab, setPosterTab] = useState<'carnet' | 'poster'>('carnet');
 
@@ -232,18 +230,6 @@ export const UGCHero: React.FC<UGCHeroProps> = ({ onExploreGallery, onOpenQuote,
               <span className="font-script text-ugc-pink text-xs font-normal">Cruz</span>
             </div>
           </div>
-
-          {/* TikTok Real Stats Quick Badge */}
-          {onExploreStats && (
-            <button
-              onClick={onExploreStats}
-              className="inline-flex items-center gap-2 mt-3 px-4 py-1.5 rounded-full bg-slate-900 text-white font-mono text-[11px] font-bold border-2 border-black shadow-sticker hover:bg-slate-800 transition-all hover:scale-105 cursor-pointer"
-            >
-              <TikTokIcon className="w-3.5 h-3.5 text-ugc-yellow" />
-              <span>Métricas Reales TikTok: <strong className="text-ugc-yellow font-chunky">+158.8K Vistas</strong> · 723 Compartidos</span>
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse ml-0.5" />
-            </button>
-          )}
         </div>
 
         {/* 2. BALANCED PRESENTATION HERO: SOFÍA'S CARNET (LEFT) + COMPACT CREATOR PROFILE CARD (RIGHT) */}
@@ -381,7 +367,7 @@ export const UGCHero: React.FC<UGCHeroProps> = ({ onExploreGallery, onOpenQuote,
                 </div>
               </div>
 
-              {/* Short & Direct Intro (Estructura inspirada en la pág 2 del Canva, concisa y sin saturar) */}
+              {/* Short & Direct Intro */}
               <div className="py-3.5 space-y-2.5 text-slate-700 text-xs sm:text-sm leading-relaxed font-medium">
                 <p>
                   ¡Hola! Soy Sofía Cruz, creadora de contenido UGC. Me encanta probar productos, contar experiencias reales y crear videos auténticos que conecten genuinamente con las personas. Mi estilo es <strong>dinámico, estético y siempre pensado para generar impacto</strong> en TikTok e Instagram.
@@ -390,37 +376,6 @@ export const UGCHero: React.FC<UGCHeroProps> = ({ onExploreGallery, onOpenQuote,
                 <p>
                   Trabajo con marcas que realmente me gustan. Para mí, lo más importante es <strong>la confianza con mi audiencia</strong> y que cada colaboración se sienta 100% natural y espontánea.
                 </p>
-
-                <p className="font-chunky text-ugc-berry text-xs sm:text-sm pt-0.5">
-                  Si buscas contenido fresco, estético y real para tu marca, ¡hablemos! ✨
-                </p>
-
-                {/* 3 Quick Benefit Pills */}
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 pt-1">
-                  <div className="p-2.5 rounded-2xl bg-[#FBF8EF] border-2 border-black flex items-center gap-2 shadow-xs">
-                    <span className="text-xl">🎬</span>
-                    <div>
-                      <strong className="block text-slate-900 text-xs leading-tight font-bold">Videos 9:16</strong>
-                      <span className="text-[10px] text-slate-500 font-sans">TikTok & Reels</span>
-                    </div>
-                  </div>
-
-                  <div className="p-2.5 rounded-2xl bg-[#FBF8EF] border-2 border-black flex items-center gap-2 shadow-xs">
-                    <span className="text-xl">⏱️</span>
-                    <div>
-                      <strong className="block text-slate-900 text-xs leading-tight font-bold">Entrega Ágil</strong>
-                      <span className="text-[10px] text-slate-500 font-sans">3 a 5 días hábiles</span>
-                    </div>
-                  </div>
-
-                  <div className="p-2.5 rounded-2xl bg-[#FBF8EF] border-2 border-black flex items-center gap-2 shadow-xs">
-                    <span className="text-xl">🔥</span>
-                    <div>
-                      <strong className="block text-slate-900 text-xs leading-tight font-bold">+158.8K Vistas</strong>
-                      <span className="text-[10px] text-slate-500 font-sans">Alcance real</span>
-                    </div>
-                  </div>
-                </div>
               </div>
 
               {/* Bottom CTAs & Rights Note */}
@@ -455,23 +410,13 @@ export const UGCHero: React.FC<UGCHeroProps> = ({ onExploreGallery, onOpenQuote,
 
         </div>
 
-        {/* 3. REDES SOCIALES OFICIALES & CANALES DIRECTOS DE SOFÍA */}
+        {/* 3. REDES SOCIALES OFICIALES (INSTAGRAM & TIKTOK) */}
         <div className="flex flex-wrap items-center justify-center gap-2.5 pt-1">
-          <a
-            href="https://wa.me/573023399168?text=Hola%20Sof%C3%ADa,%20me%20gustar%C3%ADa%20cotizar%20un%20proyecto%20de%20contenido%20UGC"
-            target="_blank"
-            rel="noreferrer"
-            className="px-3.5 py-1.5 rounded-full bg-[#25D366]/20 border-2 border-black text-slate-900 font-bold text-xs shadow-sm hover:bg-[#25D366]/30 transition-all flex items-center gap-1.5 group"
-          >
-            <MessageCircle className="w-3.5 h-3.5 text-emerald-700 group-hover:scale-110 transition-transform" />
-            <span>WhatsApp: 3023399168</span>
-          </a>
-
           <a
             href="https://www.instagram.com/sofiacruz0?rpxt=eGo2ODZtbXU2dWM0"
             target="_blank"
             rel="noreferrer"
-            className="px-3.5 py-1.5 rounded-full bg-ugc-pink/20 border-2 border-black text-slate-900 font-bold text-xs shadow-sm hover:bg-ugc-pink/30 transition-all flex items-center gap-1.5 group"
+            className="px-4 py-1.5 rounded-full bg-ugc-pink/20 hover:bg-ugc-pink/30 border-2 border-black text-slate-900 font-bold text-xs shadow-sm transition-all flex items-center gap-1.5 group cursor-pointer"
           >
             <InstagramIcon className="w-3.5 h-3.5 text-ugc-pink group-hover:scale-110 transition-transform" />
             <span>Instagram: @sofiacruz0</span>
@@ -481,18 +426,10 @@ export const UGCHero: React.FC<UGCHeroProps> = ({ onExploreGallery, onOpenQuote,
             href="https://www.tiktok.com/@sofiacruzve?_r=1&_t=ZS-9AisJbpLF0n"
             target="_blank"
             rel="noreferrer"
-            className="px-3.5 py-1.5 rounded-full bg-slate-900 text-white border-2 border-black font-bold text-xs shadow-sm hover:bg-slate-800 transition-all flex items-center gap-1.5 group"
+            className="px-4 py-1.5 rounded-full bg-slate-900 hover:bg-slate-800 text-white border-2 border-black font-bold text-xs shadow-sm transition-all flex items-center gap-1.5 group cursor-pointer"
           >
             <TikTokIcon className="w-3.5 h-3.5 text-ugc-yellow group-hover:scale-110 transition-transform" />
             <span>TikTok: @sofiacruzve</span>
-          </a>
-
-          <a
-            href="mailto:anasofiacruzvega@gmail.com"
-            className="px-3.5 py-1.5 rounded-full bg-ugc-yellow/80 border-2 border-black text-slate-900 font-bold text-xs shadow-sm hover:bg-ugc-yellow transition-all flex items-center gap-1.5 group"
-          >
-            <Mail className="w-3.5 h-3.5 text-ugc-pink group-hover:scale-110 transition-transform" />
-            <span>anasofiacruzvega@gmail.com</span>
           </a>
         </div>
 

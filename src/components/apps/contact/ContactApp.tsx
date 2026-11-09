@@ -6,9 +6,6 @@ import {
   Download, 
   Eye,
   Send,
-  MapPin,
-  Clock,
-  Sparkles,
   Heart,
   Code2,
   ExternalLink
@@ -80,7 +77,7 @@ export const ContactApp: React.FC = () => {
   };
 
   return (
-    <div className="p-5 sm:p-7 bg-[#FBF8EF] text-slate-900 min-h-full space-y-6 font-sans selection:bg-ugc-pink selection:text-white">
+    <div className="p-4 sm:p-6 bg-[#FBF8EF] text-slate-900 min-h-full space-y-5 font-sans selection:bg-ugc-pink selection:text-white max-w-3xl mx-auto">
       
       {/* 1. BRAND PROFILE HEADER (UGC IDENTITY) */}
       <div className="relative bg-white rounded-3xl border-3 border-black shadow-sticker p-5 sm:p-6 overflow-hidden">
@@ -109,7 +106,7 @@ export const ContactApp: React.FC = () => {
           </div>
 
           {/* Name & Bio */}
-          <div className="space-y-1.5 flex-1">
+          <div className="space-y-1 flex-1">
             <div className="flex flex-wrap items-baseline justify-center sm:justify-start gap-1.5">
               <span className="font-chunky text-2xl sm:text-3xl text-ugc-pink tracking-tight drop-shadow-[1px_2px_0px_#B4D9F4]">
                 Sofía
@@ -121,52 +118,12 @@ export const ContactApp: React.FC = () => {
                 UGC & CM
               </span>
             </div>
-
-            <p className="text-xs sm:text-[13px] text-slate-700 font-medium leading-relaxed max-w-lg">
-              Creadora de Contenido UGC & Estratega de Redes Sociales. Conectando marcas con audiencias reales a través de formatos auténticos.
-            </p>
-
-            <div className="flex flex-wrap items-center justify-center sm:justify-start gap-3 text-xs text-slate-600 pt-1 font-sans">
-              <span className="flex items-center gap-1 font-semibold text-slate-700">
-                <MapPin className="w-3.5 h-3.5 text-ugc-pink" /> Remoto / Global (Worldwide)
-              </span>
-              <span>•</span>
-              <span className="flex items-center gap-1 text-emerald-700 font-bold">
-                <Clock className="w-3.5 h-3.5" /> Agenda Abierta Q1-Q2 2026
-              </span>
-            </div>
           </div>
 
         </div>
       </div>
 
-      {/* 2. SPECIALTIES TAGS (PASTEL PILLS) */}
-      <div className="space-y-2">
-        <div className="flex items-center gap-1.5 text-xs font-chunky uppercase tracking-wider text-slate-800">
-          <Sparkles className="w-3.5 h-3.5 text-ugc-pink" />
-          <span>Especialidades de Producción:</span>
-        </div>
-
-        <div className="flex flex-wrap gap-2">
-          {[
-            { label: '🎬 Videos Verticales en Máxima Calidad', color: 'bg-ugc-yellow' },
-            { label: '✨ Inicios que Atrapan la Atención', color: 'bg-ugc-blue' },
-            { label: '📸 Sesiones de Fotos de Producto', color: 'bg-[#fff0f6]' },
-            { label: '📈 Manejo de Redes Sociales (CM)', color: 'bg-ugc-yellow' },
-            { label: '🛍️ Historias y Opiniones Reales', color: 'bg-ugc-blue' },
-            { label: '💌 Videos Listos para Anuncios', color: 'bg-[#fff0f6]' },
-          ].map((tag) => (
-            <span
-              key={tag.label}
-              className={`px-3 py-1 rounded-full border-2 border-black text-xs font-bold text-slate-900 shadow-sm ${tag.color}`}
-            >
-              {tag.label}
-            </span>
-          ))}
-        </div>
-      </div>
-
-      {/* 3. MEDIA KITS DOWNLOAD BANNER (UGC & COMMUNITY MANAGER) */}
+      {/* 2. MEDIA KITS DOWNLOAD BANNER (UGC & COMMUNITY MANAGER) */}
       <div className="space-y-3">
         <div className="flex items-center gap-1.5 text-xs font-chunky uppercase tracking-wider text-slate-800">
           <Heart className="w-3 h-3 fill-ugc-pink" />
