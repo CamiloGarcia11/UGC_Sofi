@@ -80,46 +80,50 @@ export const ContactApp: React.FC = () => {
     <div className="p-4 sm:p-6 bg-[#FBF8EF] text-slate-900 min-h-full space-y-5 font-sans selection:bg-ugc-pink selection:text-white max-w-3xl mx-auto">
       
       {/* 1. BRAND PROFILE HEADER (UGC IDENTITY) */}
-      <div className="relative bg-white rounded-3xl border-3 border-black shadow-sticker p-5 sm:p-6 overflow-hidden">
+      <div className="relative bg-white rounded-2xl sm:rounded-3xl border-3 border-black shadow-sticker p-4 sm:p-5 mt-3">
         
         {/* Top Washi Tape */}
-        <div className="absolute -top-3 left-8 z-10">
-          <div className="px-4 py-0.5 bg-ugc-yellow/95 border border-black text-[9px] font-mono uppercase tracking-widest font-bold shadow-sm transform -rotate-1 text-slate-900">
+        <div className="absolute -top-3.5 left-6 sm:left-8 z-10">
+          <div className="px-3.5 py-0.5 bg-ugc-yellow border border-black text-[9px] font-mono uppercase tracking-widest font-bold shadow-xs transform -rotate-1 text-slate-900 rounded-sm">
             // SOFÍA CRUZ · CONTACTO DIRECTO
           </div>
         </div>
 
-        <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 sm:gap-5 text-center sm:text-left pt-1">
-          
-          {/* Creator Real Avatar with UGC Colors */}
-          <div className="relative shrink-0">
-            <div className="w-20 h-20 sm:w-22 sm:h-22 rounded-full bg-ugc-yellow p-1 border-2 border-black shadow-[3px_3px_0px_#000] overflow-hidden">
+        <div className="flex items-center justify-between gap-4 pt-1">
+          <div className="flex items-center gap-3.5 sm:gap-4">
+            {/* Creator Real Avatar with UGC Colors */}
+            <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-ugc-yellow p-0.5 border-2 border-black shadow-[2px_2px_0px_#000] overflow-hidden shrink-0">
               <img
                 src={sofiaPresentationImg}
                 alt="Sofía Cruz"
                 className="w-full h-full rounded-full object-cover object-[center_42%]"
               />
             </div>
-            <span className="absolute -bottom-1 -right-1 px-2 py-0.5 rounded-full bg-ugc-pink text-white font-chunky text-[9px] border border-black shadow-sm">
-              ★ DISPONIBLE
-            </span>
-          </div>
 
-          {/* Name & Bio */}
-          <div className="space-y-1 flex-1">
-            <div className="flex flex-wrap items-baseline justify-center sm:justify-start gap-1.5">
-              <span className="font-chunky text-2xl sm:text-3xl text-ugc-pink tracking-tight drop-shadow-[1px_2px_0px_#B4D9F4]">
-                Sofía
-              </span>
-              <span className="font-script text-2xl sm:text-3xl text-ugc-yellow -ml-0.5 drop-shadow-[1px_1px_0px_#E33B87]">
-                Cruz
-              </span>
-              <span className="px-2.5 py-0.5 rounded-full bg-ugc-blue border border-black text-[10px] font-bold text-slate-900 ml-1">
-                UGC & CM
+            {/* Name & Title */}
+            <div>
+              <div className="flex flex-wrap items-baseline gap-1.5">
+                <span className="font-chunky text-2xl sm:text-3xl text-ugc-pink tracking-tight drop-shadow-[1px_2px_0px_#B4D9F4] leading-none">
+                  Sofía
+                </span>
+                <span className="font-script text-2xl sm:text-3xl text-ugc-yellow -ml-0.5 drop-shadow-[1px_1px_0px_#E33B87] leading-none">
+                  Cruz
+                </span>
+                <span className="px-2 py-0.5 rounded-full bg-ugc-blue border border-black text-[9px] font-bold text-slate-900 ml-1">
+                  UGC & CM
+                </span>
+              </div>
+              <span className="text-[11px] text-slate-500 font-mono font-medium block mt-1">
+                Estrategia, Producción & Colaboraciones
               </span>
             </div>
           </div>
 
+          {/* Status Badge */}
+          <div className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FBF8EF] border border-black text-[10px] font-mono font-bold text-slate-800 shadow-xs shrink-0">
+            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+            <span>DISPONIBLE 2026</span>
+          </div>
         </div>
       </div>
 
