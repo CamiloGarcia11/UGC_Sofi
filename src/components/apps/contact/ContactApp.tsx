@@ -145,7 +145,7 @@ export const ContactApp: React.FC = () => {
                 Media Kit UGC & Tarifario 2026
               </h4>
               <p className="text-[11px] text-slate-600 font-medium leading-relaxed">
-                Videos verticales orgánicos y pauta (Reels/TikTok) desde $80.000 COP hasta combos de $250.000 COP.
+                Videos UGC, Reels en locación y ráfagas de historias desde $90.000 COP + producto.
               </p>
             </div>
 

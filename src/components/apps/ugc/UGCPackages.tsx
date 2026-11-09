@@ -15,88 +15,92 @@ import type { UGCPackage } from '../../../types/ugc';
 
 const UGC_PACKAGES: UGCPackage[] = [
   {
-    id: 'pack-single',
-    name: '1 Video UGC',
-    badge: 'PRUEBA INDIVIDUAL',
+    id: 'pack-ugc',
+    name: 'Video UGC',
+    badge: 'PARA ANUNCIOS & PAUTA',
     videosCount: 1,
-    description: 'Perfecto para probar el formato UGC por primera vez con un video enfocado en tu producto o prenda.',
-    deliveryTime: 'Entrega en 3 a 5 días',
-    priceEstimate: '$80.000 COP',
+    description: 'Contenido grabado y editado para uso exclusivo de tu marca en pauta o redes, sin publicación en mi perfil.',
+    deliveryTime: 'Entrega en 3 a 5 días hábiles',
+    priceEstimate: '$130.000 COP + producto',
     features: [
-      '1 Video vertical 9:16 (hasta 1 min de duración)',
-      'Hasta 3 prendas o 1 producto destacado',
-      'Edición ágil con subtítulos claros y música en tendencia',
-      'Enfoque auténtico adaptado al estilo de tu marca',
-      'Derechos de uso para tus redes sociales y pauta',
-      '1 ronda de correcciones menores incluida'
+      '📦 El producto físico enviado queda en poder de la creadora',
+      '⏱️ Formato vertical 9:16 (hasta 1 min de duración)',
+      '👗 Máximo hasta 3 prendas o 1 producto destacado',
+      '💼 Derechos comerciales de uso para pauta y redes de tu marca',
+      '✨ Edición dinámica con subtítulos claros y música en tendencia',
+      '🔄 1 ronda de correcciones menores incluida tras entrega'
     ]
   },
   {
-    id: 'pack-trio',
-    name: 'Pack 3 Videos UGC',
-    badge: '★ EL MÁS ELEGIDO · AHORRA $60.000 ★',
+    id: 'pack-reel-home',
+    name: 'Reel desde Casa',
+    badge: '★ PUBLICADO EN PERFIL · 295K VISTAS ★',
     recommended: true,
-    videosCount: 3,
-    description: 'El paquete favorito para testear diferentes ángulos, ganchos de inicio y formatos para multiplicar tus ventas.',
-    deliveryTime: 'Entrega en 3 a 5 días',
-    priceEstimate: '$180.000 COP',
+    videosCount: 1,
+    description: 'Video grabado con buena iluminación, edición atractiva y en tendencia, publicado directamente en mi perfil oficial.',
+    deliveryTime: 'Entrega en 3 a 5 días hábiles',
+    priceEstimate: '$180.000 COP + producto',
     features: [
-      '3 Videos institucionales o publicitarios (hasta 1 min c/u)',
-      'Hasta 3 prendas o 1 producto por cada video',
-      'Variedad de ganchos: demostración, reseña y unboxing',
-      'Edición dinámica con tomas de apoyo en detalle',
-      'Derechos comerciales completos para pauta y anuncios',
-      '1 ronda de correcciones menores incluida'
+      '📲 Publicación oficial en @sofiacruzve (TikTok) o @sofiacruz0 (Instagram)',
+      '🏷️ Mención directa y etiqueta a la cuenta oficial de tu marca',
+      '📦 El producto físico enviado queda en poder de la creadora',
+      '⏱️ Formato vertical 9:16 (hasta 1 min de duración)',
+      '✨ 1 ronda de correcciones menores antes de publicación',
+      '💬 Monitoreo y respuesta a comentarios de audiencia inicial'
     ]
   },
   {
-    id: 'pack-monthly',
-    name: 'TikTok - Pack Mensual',
-    badge: '1 VIDEO CADA SEMANA',
-    videosCount: 4,
-    description: 'Presencia continua en redes con un video fresco cada semana para mantener el tráfico y las ventas activas.',
-    deliveryTime: 'Entregas semanales programadas',
-    priceEstimate: '$250.000 COP',
+    id: 'pack-reel-location',
+    name: 'Reel en Locación',
+    badge: '📍 PRESENCIAL EN CÚCUTA & ÁREA METROPOLITANA',
+    videosCount: 1,
+    description: 'Grabado presencialmente en el lugar que elijas (tienda, restaurante, boutique o evento) para mostrar mejor la experiencia.',
+    deliveryTime: 'Fecha a convenir según agenda previa',
+    priceEstimate: '$250.000 COP + producto',
     features: [
-      '4 Videos en el mes (1 video nuevo cada semana)',
-      'Contenido constante para no perder relevancia en el algoritmo',
-      'Ideas de guiones y conceptos adaptados a tu tienda',
-      'Edición completa con formato vertical 9:16',
-      'Uso comercial para tus campañas del mes',
-      'Atención y coordinación directa por WhatsApp'
+      '📍 Asistencia presencial de Sofía en Cúcuta o área metropolitana',
+      '🎥 Grabación in situ: instalaciones, experiencia, prueba o degustación',
+      '📲 Publicación oficial en @sofiacruz0 (Instagram) o @sofiacruzve (TikTok)',
+      '🍔 El consumo, producto o acceso corre por cuenta del establecimiento',
+      '⏱️ Formato vertical 9:16 (hasta 1 min de duración con edición ágil)',
+      '✨ 1 ronda de correcciones menores antes de la publicación final'
     ]
   }
 ];
 
 const ADDITIONAL_SERVICES = [
   {
-    title: 'Pack de Impulso (Combo)',
-    desc: '1 TikTok / Reel + 1 Ráfaga de historias en Instagram',
-    price: '$150.000 COP',
-    badge: 'COMBO VIRAL'
+    title: 'Ráfaga de Historias (3 Historias)',
+    desc: '3 historias consecutivas mostrando el producto y mencionando la marca con enlace directo en @sofiacruz0.',
+    price: '$90.000 COP + producto',
+    badge: '22K VISTAS EN STORIES',
+    terms: '3 historias continuas + link directo + producto queda con la creadora'
   },
   {
-    title: 'Pack de Fotografías',
-    desc: '3 fotografías profesionales por producto o prenda',
-    price: '$70.000 COP',
-    badge: 'FOTOS PRO'
+    title: 'Post en Instagram (Feed)',
+    desc: 'Publicación permanente en el feed fotográfico mostrando el producto o prenda y mencionando la marca en caption.',
+    price: '$120.000 COP + producto',
+    badge: 'FEED PERMANENTE',
+    terms: 'Post estético + copy persuasivo + producto queda con la creadora'
   },
   {
-    title: 'Instagram - 1 Historia',
-    desc: 'Historia publicada en @sofiacruz0 con enlace directo',
-    price: '$60.000 COP',
-    badge: '@sofiacruz0'
+    title: 'Pack de Fotografías (3 Fotos)',
+    desc: '3 fotografías de producto o prendas en alta resolución con iluminación estética listas para catálogo.',
+    price: '$70.000 COP + producto',
+    badge: 'FOTOS DE PRODUCTO',
+    terms: '3 fotos en alta calidad + retoque digital + producto queda con la creadora'
   },
   {
-    title: 'Instagram - Ráfaga de Historias',
-    desc: 'Secuencia completa de historias para destacar tu marca',
-    price: '$100.000 COP',
-    badge: 'HISTORIAS'
+    title: 'Alianzas & Colaboraciones a Largo Plazo',
+    desc: 'Paquetes especiales según cantidad de contenido para empresas y centros comerciales con campañas amplias.',
+    price: 'Tarifa Flexible / A Convenir',
+    badge: 'EMPRESAS & CENTROS COMERCIALES',
+    terms: 'Esquema a la medida acordado directamente con el empresario o centro comercial'
   }
 ];
 
 export const UGCPackages: React.FC = () => {
-  const [selectedPackId, setSelectedPackId] = useState<string>('pack-trio');
+  const [selectedPackId, setSelectedPackId] = useState<string>('pack-reel-home');
   const packagesScrollRef = useRef<HTMLDivElement>(null);
   const servicesScrollRef = useRef<HTMLDivElement>(null);
 
@@ -358,9 +362,12 @@ export const UGCPackages: React.FC = () => {
                     <h5 className="font-chunky text-xs sm:text-sm text-slate-900 mb-1 group-hover:text-ugc-pink transition-colors">
                       {srv.title}
                     </h5>
-                    <p className="text-[11px] text-slate-600 leading-snug mb-3">
+                    <p className="text-[11px] text-slate-600 leading-snug mb-2">
                       {srv.desc}
                     </p>
+                    <span className="text-[9.5px] font-mono text-slate-500 block mb-2.5 pt-1.5 border-t border-slate-100">
+                      ✦ {srv.terms}
+                    </span>
                   </div>
                   <div className="pt-2 border-t border-slate-200 flex items-center justify-between">
                     <span className="font-chunky text-sm text-slate-900">
