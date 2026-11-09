@@ -9,8 +9,8 @@ export const DesktopIcons: React.FC = () => {
   const icons = [
     {
       id: 'ugc' as WindowId,
-      name: 'UGC_Creator_Studio.exe',
-      label: 'UGC Creator Studio.exe',
+      name: 'Portafolio_UGC.exe',
+      label: 'Portafolio UGC',
       type: 'Aplicación',
       renderIcon: () => (
         <div className="relative w-12 h-12 flex items-center justify-center">

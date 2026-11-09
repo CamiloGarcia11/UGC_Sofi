@@ -19,7 +19,7 @@ const getInitialWindows = (): Record<WindowId, WindowState> => ({
   },
   ugc: {
     id: 'ugc',
-    title: 'UGC Creator Studio - Internet Explorer',
+    title: 'Portafolio UGC - Internet Explorer',
     subtitle: 'Creatividad, Reels & TikToks 9:16',
     isOpen: false,
     isMinimized: false,

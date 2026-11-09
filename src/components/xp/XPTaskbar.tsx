@@ -135,7 +135,7 @@ export const XPTaskbar: React.FC = () => {
                   <Video className="w-4 h-4" />
                 </div>
                 <div>
-                  <span className="font-bold text-xs block leading-tight">UGC Studio</span>
+                  <span className="font-bold text-xs block leading-tight">Portafolio UGC</span>
                   <span className="text-[10px] text-slate-500 group-hover:text-blue-100 block">Reels & Videos 9:16</span>
                 </div>
               </button>
@@ -317,7 +317,7 @@ export const XPTaskbar: React.FC = () => {
             <button
               onClick={() => openWindow('ugc')}
               className="p-1 hover:bg-white/20 rounded cursor-pointer"
-              title="Abrir UGC Creator Studio"
+              title="Abrir Portafolio UGC"
             >
               <Video className="w-3.5 h-3.5 text-pink-300" />
             </button>

@@ -6,10 +6,6 @@ import {
   Sparkles,
   Camera,
   CheckCircle2,
-  TrendingUp,
-  Eye,
-  Users,
-  Award,
   MessageCircle,
   Mail
 } from 'lucide-react';
@@ -208,8 +204,8 @@ export const UGCHero: React.FC<UGCHeroProps> = ({ onExploreGallery, onOpenQuote,
         {/* 1. TOP BRAND HEADER: LOGO & TAGS */}
         <div className="flex flex-col items-center justify-center text-center pt-1">
           
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-ugc-blue/40 border border-ugc-blue text-slate-800 text-[10px] font-bold tracking-[0.22em] uppercase mb-1.5">
-            <span>PORTAFOLIO UGC · PRESENTACIÓN OFICIAL</span>
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-ugc-yellow/40 border border-black text-slate-900 text-[10px] font-bold tracking-[0.22em] uppercase mb-1.5 shadow-xs">
+            <span>MEDIA KIT · CREATOR CONTENT 2026</span>
           </div>
 
           <div className="flex items-baseline justify-center gap-2 sm:gap-3.5 my-1 sm:my-2">
@@ -364,7 +360,7 @@ export const UGCHero: React.FC<UGCHeroProps> = ({ onExploreGallery, onOpenQuote,
               <div className="absolute -top-3.5 left-8 z-20">
                 <div className="px-3.5 py-1 bg-ugc-yellow border-2 border-black text-[10px] font-mono uppercase tracking-wider text-slate-900 shadow-sm font-bold transform -rotate-1 rounded-md flex items-center gap-1.5">
                   <Sparkles className="w-3 h-3 text-ugc-pink" />
-                  <span>HOLA, SOY SOFÍA ✨</span>
+                  <span>SOBRE MÍ 🌸</span>
                 </div>
               </div>
 
@@ -375,7 +371,7 @@ export const UGCHero: React.FC<UGCHeroProps> = ({ onExploreGallery, onOpenQuote,
                     ¡Hola! Soy <span className="text-ugc-pink drop-shadow-[1px_1px_0px_#B4D9F4]">Sofía Cruz</span> 👋
                   </h3>
                   <p className="text-xs sm:text-[13px] text-ugc-berry font-bold mt-0.5">
-                    Creadora de Contenido UGC & Estratega Visual
+                    Creadora de Contenido UGC & Diseñadora Estratégica
                   </p>
                 </div>
 
@@ -385,13 +381,21 @@ export const UGCHero: React.FC<UGCHeroProps> = ({ onExploreGallery, onOpenQuote,
                 </div>
               </div>
 
-              {/* Short & Direct Intro (Directo, breve y sin rodeos) */}
-              <div className="py-3.5 space-y-3 text-slate-700 text-xs sm:text-sm leading-relaxed font-medium">
+              {/* Short & Direct Intro (Estructura inspirada en la pág 2 del Canva, concisa y sin saturar) */}
+              <div className="py-3.5 space-y-2.5 text-slate-700 text-xs sm:text-sm leading-relaxed font-medium">
                 <p>
-                  Ayudo a marcas de <strong>moda, belleza y estilo de vida</strong> a conectar con personas reales a través de videos dinámicos para TikTok y Reels, creados para frenar el scroll y multiplicar tus ventas de forma auténtica.
+                  ¡Hola! Soy Sofía Cruz, creadora de contenido UGC. Me encanta probar productos, contar experiencias reales y crear videos auténticos que conecten genuinamente con las personas. Mi estilo es <strong>dinámico, estético y siempre pensado para generar impacto</strong> en TikTok e Instagram.
                 </p>
 
-                {/* 3 Quick Benefit Pills (Visual, directo, fácil de leer en 3 segundos) */}
+                <p>
+                  Trabajo con marcas que realmente me gustan. Para mí, lo más importante es <strong>la confianza con mi audiencia</strong> y que cada colaboración se sienta 100% natural y espontánea.
+                </p>
+
+                <p className="font-chunky text-ugc-berry text-xs sm:text-sm pt-0.5">
+                  Si buscas contenido fresco, estético y real para tu marca, ¡hablemos! ✨
+                </p>
+
+                {/* 3 Quick Benefit Pills */}
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 pt-1">
                   <div className="p-2.5 rounded-2xl bg-[#FBF8EF] border-2 border-black flex items-center gap-2 shadow-xs">
                     <span className="text-xl">🎬</span>
@@ -490,121 +494,6 @@ export const UGCHero: React.FC<UGCHeroProps> = ({ onExploreGallery, onOpenQuote,
             <Mail className="w-3.5 h-3.5 text-ugc-pink group-hover:scale-110 transition-transform" />
             <span>anasofiacruzvega@gmail.com</span>
           </a>
-        </div>
-
-        {/* 4. REJILLA DE ESTADÍSTICAS REALES DE TIKTOK (@sofiacruzve) */}
-        <div id="ugc-stats-grid" className="bg-white rounded-3xl border-3 border-black shadow-[8px_8px_0px_#000000] p-5 sm:p-7">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 mb-4 border-b-2 border-slate-900/10">
-            <div>
-              <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-slate-900 text-ugc-yellow border border-black text-[10px] font-mono font-bold uppercase">
-                <TikTokIcon className="w-3 h-3 text-ugc-yellow" />
-                <span>MÉTRICAS REALES EN TIKTOK (@sofiacruzve)</span>
-              </div>
-              <h3 className="font-chunky text-xl sm:text-2xl text-slate-900 mt-1">
-                Resultados & Alcance Comprobado
-              </h3>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4">
-            
-            {/* Stat 1 */}
-            <div className="p-3.5 rounded-2xl bg-ugc-pink/10 border-2 border-black shadow-sm text-center">
-              <div className="w-8 h-8 rounded-full bg-ugc-pink text-white flex items-center justify-center mx-auto mb-1.5 shadow-sm">
-                <Eye className="w-4 h-4" />
-              </div>
-              <span className="font-chunky text-2xl text-ugc-pink block leading-tight">
-                158.8K
-              </span>
-              <span className="text-[11px] font-bold text-slate-800 block mt-0.5">
-                Vistas Totales
-              </span>
-              <span className="text-[9px] text-slate-500 font-sans block">
-                Alcance acumulado TikTok
-              </span>
-            </div>
-
-            {/* Stat 2 */}
-            <div className="p-3.5 rounded-2xl bg-ugc-yellow/30 border-2 border-black shadow-sm text-center">
-              <div className="w-8 h-8 rounded-full bg-ugc-yellow text-slate-900 border border-black flex items-center justify-center mx-auto mb-1.5 shadow-sm">
-                <TrendingUp className="w-4 h-4 text-ugc-pink" />
-              </div>
-              <span className="font-chunky text-2xl text-slate-900 block leading-tight">
-                15.6K
-              </span>
-              <span className="text-[11px] font-bold text-slate-800 block mt-0.5">
-                Pico Máximo
-              </span>
-              <span className="text-[9px] text-slate-500 font-sans block">
-                Vistas en un solo periodo
-              </span>
-            </div>
-
-            {/* Stat 3 */}
-            <div className="p-3.5 rounded-2xl bg-ugc-blue/30 border-2 border-black shadow-sm text-center">
-              <div className="w-8 h-8 rounded-full bg-ugc-blue text-slate-900 border border-black flex items-center justify-center mx-auto mb-1.5 shadow-sm">
-                <Users className="w-4 h-4 text-slate-900" />
-              </div>
-              <span className="font-chunky text-2xl text-slate-900 block leading-tight">
-                2.7K
-              </span>
-              <span className="text-[11px] font-bold text-slate-800 block mt-0.5">
-                Visitas al Perfil
-              </span>
-              <span className="text-[9px] text-slate-500 font-sans block">
-                Tráfico con alto interés
-              </span>
-            </div>
-
-            {/* Stat 4 */}
-            <div className="p-3.5 rounded-2xl bg-[#fff0f6] border-2 border-black shadow-sm text-center">
-              <div className="w-8 h-8 rounded-full bg-ugc-pink text-white flex items-center justify-center mx-auto mb-1.5 shadow-sm">
-                <TrendingUp className="w-4 h-4" />
-              </div>
-              <span className="font-chunky text-2xl text-ugc-pink block leading-tight">
-                5.8K
-              </span>
-              <span className="text-[11px] font-bold text-slate-800 block mt-0.5">
-                Me Gusta
-              </span>
-              <span className="text-[9px] text-slate-500 font-sans block">
-                Reacciones orgánicas
-              </span>
-            </div>
-
-            {/* Stat 5 */}
-            <div className="p-3.5 rounded-2xl bg-emerald-50 border-2 border-black shadow-sm text-center">
-              <div className="w-8 h-8 rounded-full bg-emerald-500 text-white flex items-center justify-center mx-auto mb-1.5 shadow-sm">
-                <Award className="w-4 h-4 text-white" />
-              </div>
-              <span className="font-chunky text-2xl text-emerald-950 block leading-tight">
-                723
-              </span>
-              <span className="text-[11px] font-bold text-slate-800 block mt-0.5">
-                Compartidos
-              </span>
-              <span className="text-[9px] text-emerald-700 font-sans font-bold block">
-                Factor viral UGC
-              </span>
-            </div>
-
-            {/* Stat 6 */}
-            <div className="p-3.5 rounded-2xl bg-ugc-blue/30 border-2 border-black shadow-sm text-center">
-              <div className="w-8 h-8 rounded-full bg-ugc-blue text-slate-900 border border-black flex items-center justify-center mx-auto mb-1.5 shadow-sm">
-                <Award className="w-4 h-4 text-ugc-pink" />
-              </div>
-              <span className="font-chunky text-2xl text-slate-900 block leading-tight">
-                237
-              </span>
-              <span className="text-[11px] font-bold text-slate-800 block mt-0.5">
-                Comentarios
-              </span>
-              <span className="text-[9px] text-slate-500 font-sans block">
-                Interacción genuina
-              </span>
-            </div>
-
-          </div>
         </div>
 
       </div>
