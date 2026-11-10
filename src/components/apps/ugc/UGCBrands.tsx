@@ -11,18 +11,62 @@ interface BrandItem {
 }
 
 const BRANDS_LIST: BrandItem[] = [
-  { id: 'b1', name: 'Belleza & Glow', category: 'Cosméticos', bgColor: 'bg-ugc-pink/20', textColor: 'text-ugc-berry' },
-  { id: 'b2', name: 'Moda Urbana', category: 'Boutique', bgColor: 'bg-ugc-yellow/30', textColor: 'text-amber-900' },
-  { id: 'b3', name: 'Skincare Natural', category: 'Cuidado Facial', bgColor: 'bg-ugc-blue/30', textColor: 'text-sky-900' },
-  { id: 'b4', name: 'Joyas & Accesorios', category: 'Joyería', bgColor: 'bg-purple-100', textColor: 'text-purple-900' },
-  { id: 'b5', name: 'Gourmet & Café', category: 'Gastronomía', bgColor: 'bg-orange-100', textColor: 'text-orange-950' },
-  { id: 'b6', name: 'Cuidado Capilar', category: 'Cabello', bgColor: 'bg-emerald-100', textColor: 'text-emerald-950' },
-  { id: 'b7', name: 'Lifestyle & Tech', category: 'Tecnología', bgColor: 'bg-slate-100', textColor: 'text-slate-900' },
-  { id: 'b8', name: 'Calzado & Bolsos', category: 'Accesorios', bgColor: 'bg-pink-100', textColor: 'text-pink-900' },
-  { id: 'b9', name: 'Marcas Aliadas', category: 'Colaboraciones', bgColor: 'bg-yellow-100', textColor: 'text-amber-950' },
-  { id: 'b10', name: 'Moda Juvenil', category: 'Outfit & Ropa', bgColor: 'bg-rose-100', textColor: 'text-rose-900' },
-  { id: 'b11', name: 'Estética & Spa', category: 'Cuidado Personal', bgColor: 'bg-teal-100', textColor: 'text-teal-900' },
-  { id: 'b12', name: 'Boutique Chic', category: 'Moda Femenina', bgColor: 'bg-indigo-100', textColor: 'text-indigo-900' },
+  {
+    id: 'b-rexona',
+    name: 'Rexona',
+    category: 'Cuidado Personal',
+    bgColor: 'bg-teal-950',
+    textColor: 'text-white',
+    imgSrc: '/brands/rexona.png',
+  },
+  {
+    id: 'b-buenavista',
+    name: 'Buena Vista Hostal',
+    category: 'Turismo & Hospedaje',
+    bgColor: 'bg-amber-50',
+    textColor: 'text-amber-950',
+    imgSrc: '/brands/buenavista.png',
+  },
+  {
+    id: 'b-paisajes-cafe',
+    name: 'Paisajes & Café',
+    category: 'Cafetería & Gastronomía',
+    bgColor: 'bg-emerald-50',
+    textColor: 'text-emerald-950',
+    imgSrc: '/brands/paisajes-cafe.png',
+  },
+  {
+    id: 'b-capilla',
+    name: 'Capilla Restobar',
+    category: 'Restobar & Coctelería',
+    bgColor: 'bg-slate-900',
+    textColor: 'text-white',
+    imgSrc: '/brands/capilla-restobar.png',
+  },
+  {
+    id: 'b-cafitech',
+    name: 'Cafitech',
+    category: 'Audio & Tecnología',
+    bgColor: 'bg-purple-50',
+    textColor: 'text-purple-950',
+    imgSrc: '/brands/cafitech.png',
+  },
+  {
+    id: 'b-visionweb',
+    name: 'Vision Web',
+    category: 'Agencia & Software',
+    bgColor: 'bg-blue-50',
+    textColor: 'text-blue-950',
+    imgSrc: '/brands/vision-web.png',
+  },
+  {
+    id: 'b-pueblito',
+    name: 'Pueblito Chitarero',
+    category: 'Destino & Cultura',
+    bgColor: 'bg-yellow-50',
+    textColor: 'text-amber-950',
+    imgSrc: '/brands/pueblito-chitarero.png',
+  },
 ];
 
 export const UGCBrands: React.FC = () => {
@@ -40,9 +84,9 @@ export const UGCBrands: React.FC = () => {
     const step = () => {
       if (!isPaused && container) {
         container.scrollLeft += scrollSpeed;
-        // Si llega al final del contenido original, volver suavemente al inicio
-        if (container.scrollLeft >= container.scrollWidth / 2) {
-          container.scrollLeft = 0;
+        const oneThird = container.scrollWidth / 3;
+        if (container.scrollLeft >= oneThird * 2) {
+          container.scrollLeft -= oneThird;
         }
       }
       animationFrameId = requestAnimationFrame(step);
@@ -54,13 +98,13 @@ export const UGCBrands: React.FC = () => {
 
   const scrollManual = (direction: 'left' | 'right') => {
     if (scrollContainerRef.current) {
-      const offset = direction === 'left' ? -240 : 240;
+      const offset = direction === 'left' ? -260 : 260;
       scrollContainerRef.current.scrollBy({ left: offset, behavior: 'smooth' });
     }
   };
 
-  // Duplicamos la lista para dar efecto de carrusel continuo infinito
-  const displayBrands = [...BRANDS_LIST, ...BRANDS_LIST];
+  // Triplicamos la lista para dar efecto de carrusel continuo infinito
+  const displayBrands = [...BRANDS_LIST, ...BRANDS_LIST, ...BRANDS_LIST];
 
   return (
     <section id="ugc-brands" className="py-8 sm:py-10 px-4 sm:px-6 md:px-8 max-w-6xl mx-auto overflow-hidden">
@@ -117,28 +161,35 @@ export const UGCBrands: React.FC = () => {
           {displayBrands.map((brand, index) => (
             <div
               key={`${brand.id}-${index}`}
-              className="flex flex-col items-center shrink-0 group transition-transform hover:-translate-y-1.5"
+              className="flex flex-col items-center shrink-0 group transition-transform hover:-translate-y-1.5 cursor-pointer"
             >
               {/* Círculo estilo sticker */}
-              <div className={`w-20 h-20 sm:w-24 sm:h-24 rounded-full border-3 border-black ${brand.bgColor} flex flex-col items-center justify-center p-2 text-center shadow-[4px_4px_0px_#000000] group-hover:shadow-[6px_6px_0px_#000000] transition-all select-none overflow-hidden relative`}>
+              <div className={`w-24 h-24 sm:w-28 sm:h-28 rounded-full border-3 border-black ${brand.bgColor} flex items-center justify-center text-center shadow-[4px_4px_0px_#000000] group-hover:shadow-[6px_6px_0px_#000000] group-hover:scale-105 transition-all select-none overflow-hidden relative bg-white p-0`}>
                 {brand.imgSrc ? (
                   <img 
                     src={brand.imgSrc} 
                     alt={brand.name} 
-                    className="w-full h-full object-contain rounded-full" 
+                    className="w-full h-full object-cover rounded-full select-none pointer-events-none" 
+                    loading="lazy"
+                    draggable={false}
                   />
                 ) : (
-                  <>
+                  <div className="p-2 flex flex-col items-center justify-center">
                     <Sparkles className="w-3.5 h-3.5 text-ugc-pink mb-0.5 opacity-80" />
                     <span className={`font-chunky text-[10px] sm:text-[11px] leading-tight ${brand.textColor}`}>
                       {brand.name}
                     </span>
-                  </>
+                  </div>
                 )}
               </div>
 
+              {/* Nombre de la marca */}
+              <span className="font-chunky text-xs sm:text-[13px] text-slate-800 mt-2 text-center max-w-[120px] truncate leading-tight group-hover:text-ugc-pink transition-colors">
+                {brand.name}
+              </span>
+
               {/* Categoría pequeña debajo */}
-              <span className="font-mono text-[9px] font-bold text-slate-500 mt-1.5 uppercase tracking-wider text-center max-w-[100px] truncate">
+              <span className="font-mono text-[9px] font-bold text-slate-500 uppercase tracking-wider text-center max-w-[110px] truncate mt-0.5">
                 {brand.category}
               </span>
             </div>

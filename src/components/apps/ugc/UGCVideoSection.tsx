@@ -196,6 +196,15 @@ const CATEGORIES_DATA: Record<string, CategoryData> = {
         videoSrc: '/4.mp4',
         tags: ['Vlog de Viaje', 'Storytelling', 'Lifestyle'],
       },
+      {
+        id: 'otros-3',
+        title: 'Vlog Lifestyle & Escapada de Fin de Semana',
+        hook: '"Un día conmigo desconectando en la montaña y viviendo la experiencia completa"',
+        views: '22.3K',
+        likes: '1.9K',
+        videoSrc: '/6.mp4',
+        tags: ['Lifestyle', 'Vlog de Viaje', 'Escapada', 'Storytelling'],
+      },
     ],
   },
 };
@@ -228,6 +237,15 @@ const FEATURED_VIDEOS: VideoItem[] = [
     likes: '3.1K',
     videoSrc: '/5.mp4',
     tags: ['Experiencia', 'Foodie & Planes', 'Viral'],
+  },
+  {
+    id: 'feat-4',
+    title: 'Vlog Lifestyle & Escapada de Fin de Semana',
+    hook: '"Un día conmigo desconectando en la montaña y viviendo la experiencia"',
+    views: '22.3K',
+    likes: '1.9K',
+    videoSrc: '/6.mp4',
+    tags: ['Lifestyle', 'Vlog de Viaje', 'Experiencia Real'],
   },
 ];
 
@@ -348,7 +366,7 @@ export const UGCVideoSection: React.FC = () => {
         </div>
 
         {/* Grilla de Teléfonos Mockups 9:16 con Videos de la Categoría */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 max-w-3xl mx-auto gap-8 sm:gap-10 justify-items-center">
+        <div className={`grid grid-cols-1 sm:grid-cols-2 ${category.videos.length >= 3 ? 'lg:grid-cols-3 max-w-5xl' : 'lg:grid-cols-2 max-w-3xl'} mx-auto gap-8 sm:gap-10 justify-items-center`}>
           {category.videos.map((vid) => {
             const isPlaying = playingId === vid.id;
             const isMuted = isMutedMap[vid.id] ?? true;
@@ -487,8 +505,8 @@ export const UGCVideoSection: React.FC = () => {
         </p>
       </div>
 
-      {/* Grid de 3 Mockups Destacados en Página Principal */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 justify-items-center mb-16">
+      {/* Grid de Mockups Destacados en Página Principal */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6 justify-items-center mb-16">
         {FEATURED_VIDEOS.map((vid) => {
           const isPlaying = playingId === vid.id;
           const isMuted = isMutedMap[vid.id] ?? true;
@@ -496,7 +514,7 @@ export const UGCVideoSection: React.FC = () => {
           return (
             <div 
               key={vid.id}
-              className="w-full max-w-[300px] flex flex-col items-center group"
+              className="w-full max-w-[270px] flex flex-col items-center group"
             >
               <div 
                 onClick={() => togglePlay(vid.id)}

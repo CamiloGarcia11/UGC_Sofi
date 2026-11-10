@@ -88,6 +88,20 @@ const SAMPLE_PROJECTS: VideoProject[] = [
     tags: ['Plan Gastronómico', 'Reseña de Lugares', 'Recomendación'],
     videoSrc: '/5.mp4',
   },
+  {
+    id: 'vid-6',
+    title: 'Vlog Lifestyle & Escapada a la Montaña',
+    brand: 'Sofía Cruz · UGC',
+    category: 'Estilo de Vida',
+    views: '22.3K',
+    likes: '1.9K',
+    ctr: '6.8%',
+    gradient: 'from-emerald-200 via-teal-200 to-ugc-yellow',
+    hook: '"Un día conmigo desconectando en la montaña y viviendo la experiencia completa"',
+    aspectRatio: '9:16',
+    tags: ['Lifestyle', 'Vlog de Viaje', 'Naturaleza', 'Storytelling'],
+    videoSrc: '/6.mp4',
+  },
 ];
 
 export const UGCVideoGallery: React.FC = () => {
@@ -99,6 +113,7 @@ export const UGCVideoGallery: React.FC = () => {
     'vid-3': true,
     'vid-4': true,
     'vid-5': true,
+    'vid-6': true,
   });
   const [progressMap, setProgressMap] = useState<Record<string, number>>({});
   const [videoErrors, setVideoErrors] = useState<Record<string, boolean>>({});
